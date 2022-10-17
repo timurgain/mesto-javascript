@@ -1,0 +1,7 @@
+.profile__figure {
+  display: flex;
+  flex-direction: row;
+  column-gap: 30px;
+  align-items: center;
+  margin: 0;
+}

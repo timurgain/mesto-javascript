@@ -17,22 +17,25 @@
   </header>
 
   <main class="content">
-    <!-- Секция profile, flexbox из трех элементов -->
-    <section class="profile">
-
-      <img class="profile__avatar" src="./images/kusto.jpg" alt="Изображени пользователя">
-      <!-- flexbox из трех элементов -->
-      <div class="profile__info">
-        <p class="profile__name">Жак-Ив Кусто</p>
-        <button class="profile__edit-btn"></button>
-        <p class="profile__description">Исследователь океана</p>
-      </div>
-      <button class="profile__add-btn"></button>
+    <!-- Секция profile / flexbox из двух элементов -->
+    <section class="profile" aria-label="Профиль пользователя">
+      <!-- 1й элемент / flexbox их двух элементов -->
+      <figure class="profile__figure">
+        <img class="profile__avatar" src="./images/kusto.jpg" alt="Изображени пользователя">
+        <figcaption>
+          <h1 class="profile__name">
+            Жак-Ив Кусто
+            <button class="profile__edit-btn" type="button"></button>
+          </h1>
+          <p class="profile__description">Исследователь океана</p>
+        </figcaption>
+      </figure>
+      <!-- 2й элемент -->
+      <button class="profile__add-btn" type="button"></button>
+    </section>
 
     <!-- Секция elements, grid -->
-    </section class="elements">
-
-    <section>
+    <section class="elements">
 
     </section>
 
