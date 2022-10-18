@@ -17,22 +17,21 @@
   </header>
 
   <main class="content">
-    <!-- Секция profile / flexbox из двух элементов -->
+
+    <!-- Секция profile -->
     <section class="profile" aria-label="Профиль пользователя">
-      <!-- 1й элемент -->
+      <!-- flex из двух элементов -->
       <figure class="profile__figure">
+        <!-- flex из двух элементов -->
         <img class="profile__avatar" src="./images/kusto.jpg" alt="Изображени пользователя">
         <figcaption class="profile__caption">
-
+          <!-- grid из трех элементов -->
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-
           <button class="profile__edit-btn" type="button"></button>
-
           <p class="profile__description">Исследователь океана</p>
-
         </figcaption>
       </figure>
-      <!-- 2й элемент -->
+
       <button class="profile__add-btn" type="button"></button>
     </section>
 
@@ -87,11 +86,10 @@
       </figure>
 
     </section>
-
   </main>
 
-  <footer>
-
+  <footer class="footer">
+    <p class="footer__paragraph">© 2022 Mesto Russia</p>
   </footer>
 
 </body>
