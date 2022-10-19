@@ -1,15 +1,13 @@
 .profile__caption {
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: start;
-  align-items: baseline;
-  column-gap: 18px;
-  row-gap: 16px;
-  max-width: 336px; */
-
   display: grid;
   grid-template-columns: 1fr 24px;
   column-gap: 18px;
   row-gap: 16px;
   align-items: baseline;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__caption {
+    justify-items: center;
+  }
 }

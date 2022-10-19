@@ -9,3 +9,9 @@
   background-size: 14px;
   background-position: center;
 }
+
+@media screen and (max-width: 1023px) {
+  .profile__add-btn {
+    width: 88%;
+  }
+}
