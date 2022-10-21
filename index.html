@@ -91,7 +91,7 @@
   <!-- Pop-up window -->
   <section class="popup">
     <div class="popup__container">
-      <button class="popup__close-btn"></button>
+      <button class="popup__close-btn" type="button"></button>
 
       <h2 class="popup__header">Редактировать профиль</h2>
       <form class="popup__form" action="">
@@ -100,21 +100,18 @@
         <input class="popup__profile-name"
                id="profile-name"
                name="profile-name"
-               type="text"
-               value="Жак-Ив Кусто">
+               type="text">
 
         <label for="profile-description"></label>
         <input class="popup__profile-description"
                id="profile-description"
                name="profile-description"
-               type="text"
-               value="Исследователь океана">
+               type="text">
 
         <label for="save-btn"></label>
-        <input class="popup__save-btn"
-               id="save-btn"
-               type="button"
-               value="Сохранить">
+        <button class="popup__save-btn"
+                id="save-btn"
+                type="submit">Сохранить</button>
 
       </form>
     </div>
@@ -124,5 +121,6 @@
     <p class="footer__paragraph">© 2022 Mesto Russia</p>
   </footer>
 
+  <script src="./scripts/index.js"></script>
 </body>
 </html>
