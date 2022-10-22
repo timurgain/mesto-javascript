@@ -19,12 +19,13 @@
 
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__cards/elements__cards.css);
-@import url(../blocks/elements/__card/elements__card.css);
-@import url(../blocks/elements/__image/elements__image.css);
-@import url(../blocks/elements/__caption/elements__caption.css);
-@import url(../blocks/elements/__paragraph/elements__paragraph.css);
-@import url(../blocks/elements/__like-btn/elements__like-btn.css);
-@import url(../blocks/elements/__like-btn/_active/elements__like-btn_active.css);
+
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__caption/card__caption.css);
+@import url(../blocks/card/__header/card__header.css);
+@import url(../blocks/card/__like-btn/card__like-btn.css);
+@import url(../blocks/card/__like-btn/_active/card__like-btn_active.css);
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
