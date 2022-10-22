@@ -1,17 +1,29 @@
-# Проект: Место
+# Mesto web page
 
-### Обзор
+## Description
 
-* Figma
-* Картинки
+The project gives practice in HTML, CSS, JS and talks in pictures about beautiful places you may travel.
 
-**Figma**
+[Link on the GitHub Pages](https://timurgain.github.io/mesto/)
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+## Technologies
 
-**Картинки**
+- JavaScript and the Document Object Model (DOM);
+- HTML5 and semantic tags;
+- CSS3 and grid layout, flexbox, adaptive, @media, @font-face;
+- Block Element Modifier methodology.
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
+## Installation and launch
 
-Удачи!
+Clone repository and navigate to folder on command line:
+```
+git clone ...
+```
+
+```
+cd mesto
+```
+
+```
+open index.html
+```
