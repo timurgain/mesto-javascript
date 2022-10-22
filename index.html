@@ -17,7 +17,7 @@
   </header>
 
   <main class="content">
-
+    
     <!-- Секция profile -->
     <section class="profile" aria-label="Профиль пользователя">
       <!-- flex из двух элементов -->
@@ -35,56 +35,58 @@
       <button class="profile__add-btn" type="button"></button>
     </section>
 
-    <!-- Секция elements, grid -->
-    <section class="elements">
-      <figure class="elements__card">
-        <img class="elements__image" src="./images/chuiskiy-hrebet.jpg" alt="Чуйский хребет">
-        <figcaption class="elements__caption">
-          <p class="elements__paragraph">Северный Чуйский хребет</p>
-          <button class="elements__like-btn" type="button"></button>
-        </figcaption>
-      </figure>
+    <!-- Секция elements -->
+    <section class="elements" aria-label="Места пользователя">
+      <!-- grid -->
+      <ul class="elements__cards">
+        <li><figure class="elements__card">
+          <img class="elements__image" src="./images/chuiskiy-hrebet.jpg" alt="Чуйский хребет">
+          <figcaption class="elements__caption">
+            <p class="elements__paragraph">Северный Чуйский хребет</p>
+            <button class="elements__like-btn" type="button"></button>
+          </figcaption>
+        </figure></li>
 
-      <figure class="elements__card">
-        <img class="elements__image" src="./images/kamchatka.jpg" alt="Камчатка">
-        <figcaption class="elements__caption">
-          <p class="elements__paragraph">Камчатка</p>
-          <button class="elements__like-btn elements__like-btn_active" type="button"></button>
-        </figcaption>
-      </figure>
+        <li><figure class="elements__card">
+          <img class="elements__image" src="./images/kamchatka.jpg" alt="Камчатка">
+          <figcaption class="elements__caption">
+            <p class="elements__paragraph">Камчатка</p>
+            <button class="elements__like-btn elements__like-btn_active" type="button"></button>
+          </figcaption>
+        </figure></li>
 
-      <figure class="elements__card">
-        <img class="elements__image" src="./images/olhon.jpg" alt="Остров Ольхон">
-        <figcaption class="elements__caption">
-          <p class="elements__paragraph">Ольхон</p>
-          <button class="elements__like-btn" type="button"></button>
-        </figcaption>
-      </figure>
+        <li><figure class="elements__card">
+          <img class="elements__image" src="./images/olhon.jpg" alt="Остров Ольхон">
+          <figcaption class="elements__caption">
+            <p class="elements__paragraph">Ольхон</p>
+            <button class="elements__like-btn" type="button"></button>
+          </figcaption>
+        </figure></li>
 
-      <figure class="elements__card">
-        <img class="elements__image" src="./images/suzdal.jpg" alt="Суздаль">
-        <figcaption class="elements__caption">
-          <p class="elements__paragraph">Суздаль</p>
-          <button class="elements__like-btn" type="button"></button>
-        </figcaption>
-      </figure>
+        <li><figure class="elements__card">
+          <img class="elements__image" src="./images/suzdal.jpg" alt="Суздаль">
+          <figcaption class="elements__caption">
+            <p class="elements__paragraph">Суздаль</p>
+            <button class="elements__like-btn" type="button"></button>
+          </figcaption>
+        </figure></li>
 
-      <figure class="elements__card">
-        <img class="elements__image" src="./images/teriberka.jpg" alt="Териберка">
-        <figcaption class="elements__caption">
-          <p class="elements__paragraph">Териберка</p>
-          <button class="elements__like-btn" type="button"></button>
-        </figcaption>
-      </figure>
+        <li><figure class="elements__card">
+          <img class="elements__image" src="./images/teriberka.jpg" alt="Териберка">
+          <figcaption class="elements__caption">
+            <p class="elements__paragraph">Териберка</p>
+            <button class="elements__like-btn" type="button"></button>
+          </figcaption>
+        </figure></li>
 
-      <figure class="elements__card">
-        <img class="elements__image" src="./images/ural.jpg" alt="Уральские горы">
-        <figcaption class="elements__caption">
-          <p class="elements__paragraph">Уральские горы</p>
-          <button class="elements__like-btn" type="button"></button>
-        </figcaption>
-      </figure>
-
+        <li><figure class="elements__card">
+          <img class="elements__image" src="./images/ural.jpg" alt="Уральские горы">
+          <figcaption class="elements__caption">
+            <p class="elements__paragraph">Уральские горы</p>
+            <button class="elements__like-btn" type="button"></button>
+          </figcaption>
+        </figure></li>
+      </ul>
     </section>
   </main>
 
@@ -94,7 +96,7 @@
       <button class="popup__close-btn" type="button"></button>
 
       <h2 class="popup__header">Редактировать профиль</h2>
-      <form class="popup__form" action="">
+      <form class="popup__form" action="#">
 
         <label for="profile-name"></label>
         <input class="popup__profile-name"
