@@ -9,7 +9,7 @@ let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
 
 function togglePopup() {
-  popup.classList.toggle('popup_visible');
+  popup.classList.toggle('popup_opened');
 }
 
 function writeIntoInput() {
