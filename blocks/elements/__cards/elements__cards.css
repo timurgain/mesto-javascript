@@ -19,6 +19,7 @@
 @media screen and (max-width: 767px) {
   .elements__cards {
     grid-template-columns: minmax(1%, 1fr);
+    padding: 36px 0 0 0;
   }
 }
 
