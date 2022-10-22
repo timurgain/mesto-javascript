@@ -3,6 +3,7 @@
   height: 50px;
   padding: 0;
   border: 1px solid white;
+  outline: 0;
   border-radius: 2px;
   background-color: black;
   background-image: url(../../../images/add-button.svg);
@@ -16,6 +17,10 @@
 .profile__add-btn:hover {
   opacity: .6;
   cursor: pointer;
+}
+
+.profile__add-btn:focus {
+  opacity: .6;
 }
 
 @media screen and (max-width: 1023px) {

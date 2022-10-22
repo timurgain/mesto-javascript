@@ -9,5 +9,7 @@
 @media screen and (max-width: 767px) {
   .profile__caption {
     justify-items: center;
+    column-gap: 14px;
+    row-gap: 10px;
   }
 }
