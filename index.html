@@ -39,7 +39,18 @@
     <section class="elements" aria-label="Места пользователя">
       <!-- grid -->
       <ul class="elements__cards">
-        <li><figure class="card">
+
+        <template id="card">
+          <li><figure class="card">
+            <img class="card__image" src="" alt="">
+            <figcaption class="card__caption">
+              <h2 class="card__header"></h2>
+              <button class="card__like-btn" type="button" aria-label="Кнопка лайк"></button>
+            </figcaption>
+          </figure></li>
+        </template>
+
+        <!-- <li><figure class="card">
           <img class="card__image" src="./images/chuiskiy-hrebet.jpg" alt="Чуйский хребет">
           <figcaption class="card__caption">
             <h2 class="card__header">Северный Чуйский хребет</h2>
@@ -85,7 +96,8 @@
             <h2 class="card__header">Уральские горы</h2>
             <button class="card__like-btn" type="button" aria-label="Кнопка лайк"></button>
           </figcaption>
-        </figure></li>
+        </figure></li> -->
+
       </ul>
     </section>
   </main>
@@ -95,7 +107,7 @@
     <div class="popup__container">
       <button class="popup__close-btn" type="button"></button>
       <h2 class="popup__header">Редактировать профиль</h2>
-      
+
       <form class="popup__form" name="profile" action="#">
         <input class="popup__input" name="name" type="text">
         <input class="popup__input" name="description" type="text">

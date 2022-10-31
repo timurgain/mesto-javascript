@@ -26,3 +26,44 @@ function getFromInput() {
 profileEditBtn.addEventListener('click', () => {togglePopup(); writeIntoInput();});
 popupForm.addEventListener('submit', (evt) => {getFromInput(); togglePopup(); evt.preventDefault()});
 popupCloseBtn.addEventListener('click', togglePopup);
+
+// Построение начальной сетки
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+// Отобразить начальные карточки
+const cardTemplateContent = document.querySelector('#card').content;
+initialCards.forEach((initialCard) => {
+  const cardElement = cardTemplateContent.cloneNode(true);
+  cardElement.querySelector('.card__image').setAttribute('src', initialCard.link);
+  cardElement.querySelector('.card__header').textContent = initialCard.name;
+
+  const cardList = document.querySelector('.elements__cards');
+  cardList.append(cardElement);
+})
+
