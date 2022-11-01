@@ -28,19 +28,18 @@ popupForm.addEventListener('submit', (evt) => {getFromInput(); togglePopup(); ev
 popupCloseBtn.addEventListener('click', togglePopup);
 
 // Построение начальной сетки
-
 const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    name: 'Уральские горы',
+    link: 'images/ural.jpg'
   },
   {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    name: 'Суздаль',
+    link: 'images/suzdal.jpg'
   },
   {
     name: 'Камчатка',
@@ -56,14 +55,25 @@ const initialCards = [
   }
 ];
 
-// Отобразить начальные карточки
-const cardTemplateContent = document.querySelector('#card').content;
-initialCards.forEach((initialCard) => {
-  const cardElement = cardTemplateContent.cloneNode(true);
-  cardElement.querySelector('.card__image').setAttribute('src', initialCard.link);
-  cardElement.querySelector('.card__header').textContent = initialCard.name;
+function getCardElement() {
+  const cardTemplateContent = document.querySelector('#card').content;
+  return cardTemplateContent.cloneNode(true);
+}
 
+function fillCardElement(cardElement, cardLink, cardName) {
+  cardElement.querySelector('.card__image').setAttribute('src', cardLink);
+  cardElement.querySelector('.card__header').textContent = cardName;
+}
+
+function addCardElementToCardList(cardElement) {
   const cardList = document.querySelector('.elements__cards');
   cardList.append(cardElement);
+}
+
+initialCards.forEach((initialCard) => {
+  const card = getCardElement();
+  fillCardElement(card, initialCard.link, initialCard.name);
+  addCardElementToCardList(card);
 })
 
+//
