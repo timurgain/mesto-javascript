@@ -37,7 +37,7 @@
 
     <!-- Секция elements -->
     <section class="elements" aria-label="Места пользователя">
-      <!-- grid -->
+      <!-- grid, элементы строятся в js из template -->
       <ul class="elements__cards">
 
         <template id="card">
@@ -50,59 +50,11 @@
           </figure></li>
         </template>
 
-        <!-- <li><figure class="card">
-          <img class="card__image" src="./images/chuiskiy-hrebet.jpg" alt="Чуйский хребет">
-          <figcaption class="card__caption">
-            <h2 class="card__header">Северный Чуйский хребет</h2>
-            <button class="card__like-btn" type="button" aria-label="Кнопка лайк"></button>
-          </figcaption>
-        </figure></li>
-
-        <li><figure class="card">
-          <img class="card__image" src="./images/kamchatka.jpg" alt="Камчатка">
-          <figcaption class="card__caption">
-            <h2 class="card__header">Камчатка</h2>
-            <button class="card__like-btn card__like-btn_active" type="button" aria-label="Кнопка лайк"></button>
-          </figcaption>
-        </figure></li>
-
-        <li><figure class="card">
-          <img class="card__image" src="./images/olhon.jpg" alt="Остров Ольхон">
-          <figcaption class="card__caption">
-            <h2 class="card__header">Ольхон</h2>
-            <button class="card__like-btn" type="button" aria-label="Кнопка лайк"></button>
-          </figcaption>
-        </figure></li>
-
-        <li><figure class="card">
-          <img class="card__image" src="./images/suzdal.jpg" alt="Суздаль">
-          <figcaption class="card__caption">
-            <h2 class="card__header">Суздаль</h2>
-            <button class="card__like-btn" type="button" aria-label="Кнопка лайк"></button>
-          </figcaption>
-        </figure></li>
-
-        <li><figure class="card">
-          <img class="card__image" src="./images/teriberka.jpg" alt="Териберка">
-          <figcaption class="card__caption">
-            <h2 class="card__header">Териберка</h2>
-            <button class="card__like-btn" type="button" aria-label="Кнопка лайк"></button>
-          </figcaption>
-        </figure></li>
-
-        <li><figure class="card">
-          <img class="card__image" src="./images/ural.jpg" alt="Уральские горы">
-          <figcaption class="card__caption">
-            <h2 class="card__header">Уральские горы</h2>
-            <button class="card__like-btn" type="button" aria-label="Кнопка лайк"></button>
-          </figcaption>
-        </figure></li> -->
-
       </ul>
     </section>
   </main>
 
-  <!-- Pop-up window -->
+  <!-- Pop-up window, edit a profile -->
   <section class="popup">
     <div class="popup__container">
       <button class="popup__close-btn" type="button"></button>
@@ -114,6 +66,22 @@
         <button class="popup__save-btn"
                 id="save-btn"
                 type="submit">Сохранить</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Pop-up window, add a new place-->
+  <section class="popup">
+    <div class="popup__container">
+      <button class="popup__close-btn" type="button"></button>
+      <h2 class="popup__header">Новое место</h2>
+
+      <form class="popup__form" name="place" action="#">
+        <input class="popup__input" name="name" type="text">
+        <input class="popup__input" name="link" type="text">
+        <button class="popup__save-btn"
+                id="save-btn"
+                type="submit">Создать</button>
       </form>
     </div>
   </section>

@@ -1,31 +1,68 @@
-let popup = document.querySelector('.popup');
-let popupForm = document.querySelector('.popup__form');
-let popupCloseBtn = document.querySelector('.popup__close-btn');
+// Уникальные элементы на странице
 
-let popupProfileName = document.querySelector('.popup__input[name="name"]');
-let popupProfileDescription = document.querySelector('.popup__input[name="description"]');
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__description');
 
-let profileEditBtn = document.querySelector('.profile__edit-btn');
-let profileName = document.querySelector('.profile__name');
-let profileDescription = document.querySelector('.profile__description');
+// Функции выбора попапа и работы с формами
 
-function togglePopup() {
-  popup.classList.toggle('popup_opened');
+function getFormElem(formNameAttr) {
+  return document.querySelector(`.popup__form[name="${formNameAttr}"]`);
 }
 
-function writeIntoInput() {
+// function getFormInputElem(FormElem, inputNameAttr) {
+//   return FormElem.querySelector(`.popup__input[name="${inputNameAttr}"]`);
+// }
+
+function getFormSubmitElem(FormElem) {
+  return FormElem.querySelector('.popup__save-btn');
+}
+
+function getPopupSectionElem(formElement) {
+  const formParentDiv = formElement.parentElement;
+  return formParentDiv.parentElement;
+}
+
+function getPopupCloseBtnElem(PopupSectionElem) {
+  return PopupSectionElem.querySelector('.popup__close-btn');
+}
+
+function togglePopup(popupSectionElem) {
+  popupSectionElem.classList.toggle('popup_opened');
+}
+
+function fillFormProfile(FormElem) {
+  const popupProfileName = FormElem.querySelector('.popup__input[name="name"]');
+  const popupProfileDescription = FormElem.querySelector('.popup__input[name="description"]');
   popupProfileName.value = profileName.textContent;
   popupProfileDescription.value = profileDescription.textContent;
 }
 
-function getFromInput() {
+function saveFormProfileValues(FormElem) {
+  const popupProfileName = FormElem.querySelector('.popup__input[name="name"]');
+  const popupProfileDescription = FormElem.querySelector('.popup__input[name="description"]');
   profileName.textContent = popupProfileName.value;
   profileDescription.textContent = popupProfileDescription.value;
 }
 
-profileEditBtn.addEventListener('click', () => {togglePopup(); writeIntoInput();});
-popupForm.addEventListener('submit', (evt) => {getFromInput(); togglePopup(); evt.preventDefault()});
-popupCloseBtn.addEventListener('click', togglePopup);
+// Popup Edit Profile
+
+const profileEditBtn = document.querySelector('.profile__edit-btn');
+const profileForm = getFormElem("profile");
+const profilePopup = getPopupSectionElem(profileForm);
+const profilePopupCloseBtn = getPopupCloseBtnElem(profilePopup);
+
+profileEditBtn.addEventListener('click', () => {
+  togglePopup(profilePopup);
+  fillFormProfile(profileForm);
+});
+
+profileForm.addEventListener('submit', (evt) => {
+  saveFormProfileValues(profileForm); togglePopup(profilePopup); evt.preventDefault()});
+
+profilePopupCloseBtn.addEventListener('click', () => togglePopup(profilePopup));
+
+// Popup Add a Place
+
 
 // Построение начальной сетки
 const initialCards = [
@@ -75,5 +112,3 @@ initialCards.forEach((initialCard) => {
   fillCardElement(card, initialCard.link, initialCard.name);
   addCardElementToCardList(card);
 })
-
-//
