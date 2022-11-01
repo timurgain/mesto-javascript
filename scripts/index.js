@@ -13,9 +13,9 @@ function getFormElem(formNameAttr) {
 //   return FormElem.querySelector(`.popup__input[name="${inputNameAttr}"]`);
 // }
 
-function getFormSubmitElem(FormElem) {
-  return FormElem.querySelector('.popup__save-btn');
-}
+// function getFormSubmitElem(FormElem) {
+//   return FormElem.querySelector('.popup__save-btn');
+// }
 
 function getPopupSectionElem(formElement) {
   const formParentDiv = formElement.parentElement;
@@ -44,6 +44,29 @@ function saveFormProfileValues(FormElem) {
   profileDescription.textContent = popupProfileDescription.value;
 }
 
+// Функции работы с карточкой
+
+function getCardElement() {
+  const cardTemplateContent = document.querySelector('#card').content;
+  return cardTemplateContent.cloneNode(true);
+}
+
+function fillCardElement(cardElement, cardLink, cardName) {
+  if (cardLink.length < 1 || cardName.length < 1) return alert('Пустые поля');
+
+  cardElement.querySelector('.card__image').setAttribute('src', cardLink);
+  cardElement.querySelector('.card__header').textContent = cardName;
+}
+
+function addCardElementToCardList(cardElement, where='append') {
+  const cardList = document.querySelector('.elements__cards');
+  if (where === 'prepend') {
+    cardList.prepend(cardElement);
+  } else {
+    cardList.append(cardElement);
+  };
+}
+
 // Popup Edit Profile
 
 const profileEditBtn = document.querySelector('.profile__edit-btn');
@@ -63,8 +86,27 @@ profilePopupCloseBtn.addEventListener('click', () => togglePopup(profilePopup));
 
 // Popup Add a Place
 
+const placeAddBtn = document.querySelector('.profile__add-btn');
+const placeForm = getFormElem("place");
+const placePopup = getPopupSectionElem(placeForm);
+const placePopupCloseBtn = getPopupCloseBtnElem(placePopup);
+
+placeAddBtn.addEventListener('click', () => togglePopup(placePopup));
+
+placeForm.addEventListener('submit', (evt) => {
+  const placeName = placeForm.querySelector('.popup__input[name="name"]').value;
+  const placeLink = placeForm.querySelector('.popup__input[name="link"]').value;
+  const card = getCardElement();
+  fillCardElement(card, placeLink, placeName);
+  addCardElementToCardList(card, where='prepend');
+  togglePopup(placePopup);
+  evt.preventDefault();
+})
+
+placePopupCloseBtn.addEventListener('click', () => togglePopup(placePopup));
 
 // Построение начальной сетки
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -91,21 +133,6 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
-function getCardElement() {
-  const cardTemplateContent = document.querySelector('#card').content;
-  return cardTemplateContent.cloneNode(true);
-}
-
-function fillCardElement(cardElement, cardLink, cardName) {
-  cardElement.querySelector('.card__image').setAttribute('src', cardLink);
-  cardElement.querySelector('.card__header').textContent = cardName;
-}
-
-function addCardElementToCardList(cardElement) {
-  const cardList = document.querySelector('.elements__cards');
-  cardList.append(cardElement);
-}
 
 initialCards.forEach((initialCard) => {
   const card = getCardElement();
