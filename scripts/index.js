@@ -73,7 +73,7 @@ placeForm.addEventListener('submit', (evt) => {
 placePopupCloseBtn.addEventListener('click', () => togglePopup(placePopup));
 
 
-// Card и Card popup
+// Card and Card popup
 
 const popupCard = document.querySelector('#popup-card');
 const popupCardImage = popupCard.querySelector('.popup__image');
@@ -88,11 +88,11 @@ function getCardTemplate() {
 function fillCardElement(cardElement, cardLink, cardName) {
   if (cardLink.length < 1 || cardName.length < 1) return alert('Пустые поля');
 
-  // Присваиваем свойства
+  // attributes and text
   cardElement.querySelector('.card__image').setAttribute('src', cardLink);
   cardElement.querySelector('.card__header').textContent = cardName;
 
-  // Навешиваем слушатели событий
+  // event listeners
   cardElement.querySelector('.card__like-btn').addEventListener(
     'click', (evt) => {evt.target.classList.toggle('card__like-btn_active')}
   );
@@ -105,16 +105,16 @@ function fillCardElement(cardElement, cardLink, cardName) {
   );
   cardElement.querySelector('.card__image').addEventListener(
     'click', (evt) => {
-      // из card
+      // from card
       const img = evt.target;
       const parentElement = img.parentElement;
       const placeLink = img.src;
       const placeName = parentElement.querySelector('.card__header').textContent;
-      // в popup
+      // into popup
       popupCardImage.src = placeLink;
       popupCardImage.alt = `Фотогафия ${placeName}`;
       popupCardCaption.textContent = placeName;
-      // показать popup
+      // display popup
       togglePopup(popupCard);
     }
   );
