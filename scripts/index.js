@@ -1,21 +1,11 @@
-// Уникальные элементы на странице
+// Popups and Forms
 
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
-// Функции выбора попапа и работы с формами
-
 function getFormElem(formNameAttr) {
   return document.querySelector(`.popup__form[name="${formNameAttr}"]`);
 }
-
-// function getFormInputElem(FormElem, inputNameAttr) {
-//   return FormElem.querySelector(`.popup__input[name="${inputNameAttr}"]`);
-// }
-
-// function getFormSubmitElem(FormElem) {
-//   return FormElem.querySelector('.popup__save-btn');
-// }
 
 function getPopupSectionElem(formElement) {
   const formParentDiv = formElement.parentElement;
@@ -44,30 +34,7 @@ function saveFormProfileValues(FormElem) {
   profileDescription.textContent = popupProfileDescription.value;
 }
 
-// Функции работы с карточкой
-
-function getCardElement() {
-  const cardTemplateContent = document.querySelector('#card').content;
-  return cardTemplateContent.cloneNode(true);
-}
-
-function fillCardElement(cardElement, cardLink, cardName) {
-  if (cardLink.length < 1 || cardName.length < 1) return alert('Пустые поля');
-
-  cardElement.querySelector('.card__image').setAttribute('src', cardLink);
-  cardElement.querySelector('.card__header').textContent = cardName;
-}
-
-function addCardElementToCardList(cardElement, where='append') {
-  const cardList = document.querySelector('.elements__cards');
-  if (where === 'prepend') {
-    cardList.prepend(cardElement);
-  } else {
-    cardList.append(cardElement);
-  };
-}
-
-// Popup Edit Profile
+// Popup - Edit Profile
 
 const profileEditBtn = document.querySelector('.profile__edit-btn');
 const profileForm = getFormElem("profile");
@@ -84,7 +51,7 @@ profileForm.addEventListener('submit', (evt) => {
 
 profilePopupCloseBtn.addEventListener('click', () => togglePopup(profilePopup));
 
-// Popup Add a Place
+// Popup - Add a Place
 
 const placeAddBtn = document.querySelector('.profile__add-btn');
 const placeForm = getFormElem("place");
@@ -96,7 +63,7 @@ placeAddBtn.addEventListener('click', () => togglePopup(placePopup));
 placeForm.addEventListener('submit', (evt) => {
   const placeName = placeForm.querySelector('.popup__input[name="name"]').value;
   const placeLink = placeForm.querySelector('.popup__input[name="link"]').value;
-  const card = getCardElement();
+  const card = getCardTemplate();
   fillCardElement(card, placeLink, placeName);
   addCardElementToCardList(card, where='prepend');
   togglePopup(placePopup);
@@ -105,7 +72,45 @@ placeForm.addEventListener('submit', (evt) => {
 
 placePopupCloseBtn.addEventListener('click', () => togglePopup(placePopup));
 
-// Построение начальной сетки
+
+// Card
+
+function getCardTemplate() {
+  const cardTemplateContent = document.querySelector('#card').content;
+  return cardTemplateContent.cloneNode(true);
+}
+
+function fillCardElement(cardElement, cardLink, cardName) {
+  if (cardLink.length < 1 || cardName.length < 1) return alert('Пустые поля');
+
+  // Присваиваем свойства
+  cardElement.querySelector('.card__image').setAttribute('src', cardLink);
+  cardElement.querySelector('.card__header').textContent = cardName;
+
+  // Навешиваем слушатели событий
+  cardElement.querySelector('.card__like-btn').addEventListener(
+    'click', (evt) => {evt.target.classList.toggle('card__like-btn_active')}
+  );
+  cardElement.querySelector('.card__trash-btn').addEventListener(
+    'click', (evt) => {
+      const btn = evt.target;
+      // btn < figure < li
+      btn.parentElement.parentElement.remove();
+    }
+  )
+}
+
+function addCardElementToCardList(cardElement, where='append') {
+  const cardList = document.querySelector('.elements__cards');
+  if (where === 'prepend') {
+    cardList.prepend(cardElement);
+  } else {
+    cardList.append(cardElement);
+  };
+}
+
+
+// Filling the inital cards
 
 const initialCards = [
   {
@@ -135,7 +140,7 @@ const initialCards = [
 ];
 
 initialCards.forEach((initialCard) => {
-  const card = getCardElement();
+  const card = getCardTemplate();
   fillCardElement(card, initialCard.link, initialCard.name);
   addCardElementToCardList(card);
 })
