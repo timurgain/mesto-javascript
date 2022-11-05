@@ -136,28 +136,28 @@ function addCardElementToCardList(cardElement, where='append') {
 
 const initialCards = [
   {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    name: 'Северный чуйский хребет',
+    link: 'images/chuiskiy-hrebet.jpg'
   },
   {
-    name: 'Уральские горы',
-    link: 'images/ural.jpg'
+    name: 'Камчатка',
+    link: 'images/kamchatka.jpg'
   },
   {
     name: 'Суздаль',
     link: 'images/suzdal.jpg'
   },
   {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    name: 'Ольхон',
+    link: 'images/olhon.jpg'
   },
   {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    name: 'Териберка',
+    link: 'images/teriberka.jpg'
   },
   {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    name: 'Уральские горы',
+    link: 'images/ural.jpg'
   }
 ];
 
