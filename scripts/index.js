@@ -27,16 +27,16 @@ function getPopupCloseBtnElem(PopupSectionElem) {
   return PopupSectionElem.querySelector('.popup__close-btn');
 }
 
-function fillFormProfile(FormElem) {
-  const popupProfileName = FormElem.querySelector('.popup__input[name="name"]');
-  const popupProfileDescription = FormElem.querySelector('.popup__input[name="description"]');
+function fillFormProfile(formElem) {
+  const popupProfileName = formElem.querySelector('.popup__input[name="name"]');
+  const popupProfileDescription = formElem.querySelector('.popup__input[name="description"]');
   popupProfileName.value = profileName.textContent;
   popupProfileDescription.value = profileDescription.textContent;
 }
 
-function saveFormProfileValues(FormElem) {
-  const popupProfileName = FormElem.querySelector('.popup__input[name="name"]');
-  const popupProfileDescription = FormElem.querySelector('.popup__input[name="description"]');
+function saveFormProfileValues(formElem) {
+  const popupProfileName = formElem.querySelector('.popup__input[name="name"]');
+  const popupProfileDescription = formElem.querySelector('.popup__input[name="description"]');
   profileName.textContent = popupProfileName.value;
   profileDescription.textContent = popupProfileDescription.value;
 }
