@@ -12,7 +12,14 @@ const placePopup = document.querySelector('.place-popup');
 // Card const
 const cardPopup = document.querySelector('.card-popup');
 
+// All close popup buttons
+const buttonsPopupClose = document.querySelectorAll('.popup__close-btn')
 
+buttonsPopupClose.forEach((btn) => {
+  btn.addEventListener('click', (evt) => {
+    closePopup(evt.target.closest('.popup'))
+  })
+})
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
@@ -48,8 +55,6 @@ function getPopupCloseBtnElem(PopupSectionElem) {
 const profileEditBtn = document.querySelector('.profile__edit-btn');
 const profileForm = getFormElem("profile");
 
-const profilePopupCloseBtn = getPopupCloseBtnElem(profilePopup);
-
 profileEditBtn.addEventListener('click', () => {
   openPopup(profilePopup);
   fillFormProfile();
@@ -58,14 +63,10 @@ profileEditBtn.addEventListener('click', () => {
 profileForm.addEventListener('submit', (evt) => {
   saveFormProfileValues(); closePopup(profilePopup); evt.preventDefault()});
 
-profilePopupCloseBtn.addEventListener('click', () => closePopup(profilePopup));
-
 // Popup - Add a Place
 
 const placeAddBtn = document.querySelector('.profile__add-btn');
 const placeForm = getFormElem("place");
-
-const placePopupCloseBtn = getPopupCloseBtnElem(placePopup);
 
 placeAddBtn.addEventListener('click', () => openPopup(placePopup));
 
@@ -79,15 +80,11 @@ placeForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 })
 
-placePopupCloseBtn.addEventListener('click', () => closePopup(placePopup));
-
-
 // Card and Card popup
 
 const popupCard = document.querySelector('#popup-card');
 const popupCardImage = popupCard.querySelector('.popup__image');
 const popupCardCaption = popupCard.querySelector('.popup__caption');
-const popupCardCloseBtn = popupCard.querySelector('.popup__close-btn');
 
 function getCardTemplate() {
   const cardTemplateContent = document.querySelector('#card').content;
@@ -128,8 +125,6 @@ function fillCardElement(cardElement, cardLink, cardName) {
     }
   );
 }
-
-popupCardCloseBtn.addEventListener('click', () => closePopup(popupCard));
 
 function addCardElementToCardList(cardElement, where='append') {
   const cardList = document.querySelector('.elements__cards');
