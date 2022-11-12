@@ -1,14 +1,18 @@
-// Popup windows
+// Profile const
 const profilePopup = document.querySelector('.profile-popup');
-const placePopup = document.querySelector('.place-popup');
-const cardPopup = document.querySelector('.card-popup');
+const profileNamePopup = profilePopup.querySelector('.popup__input[name="name"]');
+const profileDescriptionPopup = profilePopup.querySelector('.popup__input[name="description"]');
 
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
-// function togglePopup(popupSectionElem) {
-//   popupSectionElem.classList.toggle('popup_opened');
-// }
+// Place const
+const placePopup = document.querySelector('.place-popup');
+
+// Card const
+const cardPopup = document.querySelector('.card-popup');
+
+
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
@@ -17,6 +21,17 @@ function openPopup(popupElement) {
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
 }
+
+function fillFormProfile() {
+  profileNamePopup.value = profileName.textContent;
+  profileDescriptionPopup.value = profileDescription.textContent;
+}
+
+function saveFormProfileValues() {
+  profileName.textContent = profileNamePopup.value;
+  profileDescription.textContent = profileDescriptionPopup.value;
+}
+
 
 
 function getFormElem(formNameAttr) {
@@ -27,19 +42,6 @@ function getPopupCloseBtnElem(PopupSectionElem) {
   return PopupSectionElem.querySelector('.popup__close-btn');
 }
 
-function fillFormProfile(formElem) {
-  const popupProfileName = formElem.querySelector('.popup__input[name="name"]');
-  const popupProfileDescription = formElem.querySelector('.popup__input[name="description"]');
-  popupProfileName.value = profileName.textContent;
-  popupProfileDescription.value = profileDescription.textContent;
-}
-
-function saveFormProfileValues(formElem) {
-  const popupProfileName = formElem.querySelector('.popup__input[name="name"]');
-  const popupProfileDescription = formElem.querySelector('.popup__input[name="description"]');
-  profileName.textContent = popupProfileName.value;
-  profileDescription.textContent = popupProfileDescription.value;
-}
 
 // Popup - Edit Profile
 
@@ -50,11 +52,11 @@ const profilePopupCloseBtn = getPopupCloseBtnElem(profilePopup);
 
 profileEditBtn.addEventListener('click', () => {
   openPopup(profilePopup);
-  fillFormProfile(profileForm);
+  fillFormProfile();
 });
 
 profileForm.addEventListener('submit', (evt) => {
-  saveFormProfileValues(profileForm); closePopup(profilePopup); evt.preventDefault()});
+  saveFormProfileValues(); closePopup(profilePopup); evt.preventDefault()});
 
 profilePopupCloseBtn.addEventListener('click', () => closePopup(profilePopup));
 
