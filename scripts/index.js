@@ -1,15 +1,13 @@
-// Popups and Forms
+// Popup windows
+const profilePopup = document.querySelector('.profile-popup');
+const placePopup = document.querySelector('.place-popup');
+const cardPopup = document.querySelector('.card-popup');
 
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
 function getFormElem(formNameAttr) {
   return document.querySelector(`.popup__form[name="${formNameAttr}"]`);
-}
-
-function getPopupSectionElem(formElement) {
-  const formParentDiv = formElement.parentElement;
-  return formParentDiv.parentElement;
 }
 
 function getPopupCloseBtnElem(PopupSectionElem) {
@@ -38,7 +36,7 @@ function saveFormProfileValues(FormElem) {
 
 const profileEditBtn = document.querySelector('.profile__edit-btn');
 const profileForm = getFormElem("profile");
-const profilePopup = getPopupSectionElem(profileForm);
+
 const profilePopupCloseBtn = getPopupCloseBtnElem(profilePopup);
 
 profileEditBtn.addEventListener('click', () => {
@@ -55,7 +53,7 @@ profilePopupCloseBtn.addEventListener('click', () => togglePopup(profilePopup));
 
 const placeAddBtn = document.querySelector('.profile__add-btn');
 const placeForm = getFormElem("place");
-const placePopup = getPopupSectionElem(placeForm);
+
 const placePopupCloseBtn = getPopupCloseBtnElem(placePopup);
 
 placeAddBtn.addEventListener('click', () => togglePopup(placePopup));
