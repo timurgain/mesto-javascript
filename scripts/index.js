@@ -1,13 +1,18 @@
 // Profile const
 const profilePopup = document.querySelector('.profile-popup');
-const profileNamePopup = profilePopup.querySelector('.popup__input[name="name"]');
-const profileDescriptionPopup = profilePopup.querySelector('.popup__input[name="description"]');
-
+const profileForm = document.forms['profile'];
+const profileFormName = profileForm.elements['name']
+const profileFormDescription = profileForm.elements['description']
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
+const profileEditBtn = document.querySelector('.profile__edit-btn');
 
 // Place const
 const placePopup = document.querySelector('.place-popup');
+const placeAddBtn = document.querySelector('.profile__add-btn');
+const placeForm = document.forms['place'];
+const placeFormName = placeForm.elements['name'];
+const placeFormLink = placeForm.elements['link'];
 
 // Card const
 const cardPopup = document.querySelector('.card-popup');
@@ -30,30 +35,17 @@ function closePopup(popupElement) {
 }
 
 function fillFormProfile() {
-  profileNamePopup.value = profileName.textContent;
-  profileDescriptionPopup.value = profileDescription.textContent;
+  profileFormName.value = profileName.textContent;
+  profileFormDescription.value = profileDescription.textContent;
 }
 
 function saveFormProfileValues() {
-  profileName.textContent = profileNamePopup.value;
-  profileDescription.textContent = profileDescriptionPopup.value;
-}
-
-
-
-function getFormElem(formNameAttr) {
-  return document.querySelector(`.popup__form[name="${formNameAttr}"]`);
-}
-
-function getPopupCloseBtnElem(PopupSectionElem) {
-  return PopupSectionElem.querySelector('.popup__close-btn');
+  profileName.textContent = profileFormName.value;
+  profileDescription.textContent = profileFormDescription.value;
 }
 
 
 // Popup - Edit Profile
-
-const profileEditBtn = document.querySelector('.profile__edit-btn');
-const profileForm = getFormElem("profile");
 
 profileEditBtn.addEventListener('click', () => {
   openPopup(profilePopup);
@@ -65,16 +57,12 @@ profileForm.addEventListener('submit', (evt) => {
 
 // Popup - Add a Place
 
-const placeAddBtn = document.querySelector('.profile__add-btn');
-const placeForm = getFormElem("place");
-
 placeAddBtn.addEventListener('click', () => openPopup(placePopup));
 
 placeForm.addEventListener('submit', (evt) => {
-  const placeName = placeForm.querySelector('.popup__input[name="name"]').value;
-  const placeLink = placeForm.querySelector('.popup__input[name="link"]').value;
+
   const card = getCardTemplate();
-  fillCardElement(card, placeLink, placeName);
+  fillCardElement(card, placeFormLink.value, placeFormName.value);
   addCardElementToCardList(card, where='prepend');
   closePopup(placePopup);
   evt.preventDefault();
