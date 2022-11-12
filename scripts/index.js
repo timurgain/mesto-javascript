@@ -6,16 +6,25 @@ const cardPopup = document.querySelector('.card-popup');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
+// function togglePopup(popupSectionElem) {
+//   popupSectionElem.classList.toggle('popup_opened');
+// }
+
+function openPopup(popupElement) {
+  popupElement.classList.add('popup_opened');
+}
+
+function closePopup(popupElement) {
+  popupElement.classList.remove('popup_opened');
+}
+
+
 function getFormElem(formNameAttr) {
   return document.querySelector(`.popup__form[name="${formNameAttr}"]`);
 }
 
 function getPopupCloseBtnElem(PopupSectionElem) {
   return PopupSectionElem.querySelector('.popup__close-btn');
-}
-
-function togglePopup(popupSectionElem) {
-  popupSectionElem.classList.toggle('popup_opened');
 }
 
 function fillFormProfile(FormElem) {
@@ -40,14 +49,14 @@ const profileForm = getFormElem("profile");
 const profilePopupCloseBtn = getPopupCloseBtnElem(profilePopup);
 
 profileEditBtn.addEventListener('click', () => {
-  togglePopup(profilePopup);
+  openPopup(profilePopup);
   fillFormProfile(profileForm);
 });
 
 profileForm.addEventListener('submit', (evt) => {
-  saveFormProfileValues(profileForm); togglePopup(profilePopup); evt.preventDefault()});
+  saveFormProfileValues(profileForm); closePopup(profilePopup); evt.preventDefault()});
 
-profilePopupCloseBtn.addEventListener('click', () => togglePopup(profilePopup));
+profilePopupCloseBtn.addEventListener('click', () => closePopup(profilePopup));
 
 // Popup - Add a Place
 
@@ -56,7 +65,7 @@ const placeForm = getFormElem("place");
 
 const placePopupCloseBtn = getPopupCloseBtnElem(placePopup);
 
-placeAddBtn.addEventListener('click', () => togglePopup(placePopup));
+placeAddBtn.addEventListener('click', () => openPopup(placePopup));
 
 placeForm.addEventListener('submit', (evt) => {
   const placeName = placeForm.querySelector('.popup__input[name="name"]').value;
@@ -64,11 +73,11 @@ placeForm.addEventListener('submit', (evt) => {
   const card = getCardTemplate();
   fillCardElement(card, placeLink, placeName);
   addCardElementToCardList(card, where='prepend');
-  togglePopup(placePopup);
+  closePopup(placePopup);
   evt.preventDefault();
 })
 
-placePopupCloseBtn.addEventListener('click', () => togglePopup(placePopup));
+placePopupCloseBtn.addEventListener('click', () => closePopup(placePopup));
 
 
 // Card and Card popup
@@ -113,12 +122,12 @@ function fillCardElement(cardElement, cardLink, cardName) {
       popupCardImage.alt = `Фотогафия ${placeName}`;
       popupCardCaption.textContent = placeName;
       // display popup
-      togglePopup(popupCard);
+      openPopup(popupCard);
     }
   );
 }
 
-popupCardCloseBtn.addEventListener('click', () => togglePopup(popupCard));
+popupCardCloseBtn.addEventListener('click', () => closePopup(popupCard));
 
 function addCardElementToCardList(cardElement, where='append') {
   const cardList = document.querySelector('.elements__cards');
