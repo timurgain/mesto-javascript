@@ -22,6 +22,7 @@ const cardList = document.querySelector('.elements__cards');
 
 const buttonsPopupClose = document.querySelectorAll('.popup__close-btn');
 
+
 // Functions
 
 function openPopup(popupElement) {
@@ -53,33 +54,13 @@ function createCard(cardLink, cardName) {
   return card;
 }
 
-// Listeners
-
-buttonsPopupClose.forEach((btn) => {
-  btn.addEventListener('click', (evt) => {
-    closePopup(evt.target.closest('.popup'))
-  })
-})
-
-profileEditBtn.addEventListener('click', () => {
-  openPopup(profilePopup);
-  fillFormProfile();
-});
-
-profileForm.addEventListener('submit', (evt) => {
-  saveFormProfileValues(); closePopup(profilePopup); evt.preventDefault()});
-
-placeAddBtn.addEventListener('click', () => openPopup(placePopup));
-
-placeForm.addEventListener('submit', (evt) => {
-  const card = createCard(placeFormLink.value, placeFormName.value)
-  addCardElementToCardList(card, where='prepend');
-  closePopup(placePopup);
-  placeForm.reset();
-  evt.preventDefault();
-})
-
-// Card and Card popup
+function addCardElementToCardList(cardElement, where='append') {
+  if (where === 'prepend') {
+    cardList.prepend(cardElement);
+  } else {
+    cardList.append(cardElement);
+  };
+}
 
 function fillCardElement(cardElement, cardLink, cardName) {
   if (cardLink.length < 1 || cardName.length < 1) return alert('Пустые поля');
@@ -109,13 +90,32 @@ function fillCardElement(cardElement, cardLink, cardName) {
   );
 }
 
-function addCardElementToCardList(cardElement, where='append') {
-  if (where === 'prepend') {
-    cardList.prepend(cardElement);
-  } else {
-    cardList.append(cardElement);
-  };
-}
+
+// Listeners
+
+buttonsPopupClose.forEach((btn) => {
+  btn.addEventListener('click', (evt) => {
+    closePopup(evt.target.closest('.popup'))
+  })
+})
+
+profileEditBtn.addEventListener('click', () => {
+  openPopup(profilePopup);
+  fillFormProfile();
+});
+
+profileForm.addEventListener('submit', (evt) => {
+  saveFormProfileValues(); closePopup(profilePopup); evt.preventDefault()});
+
+placeAddBtn.addEventListener('click', () => openPopup(placePopup));
+
+placeForm.addEventListener('submit', (evt) => {
+  const card = createCard(placeFormLink.value, placeFormName.value)
+  addCardElementToCardList(card, where='prepend');
+  closePopup(placePopup);
+  placeForm.reset();
+  evt.preventDefault();
+})
 
 
 // Filling the inital cards
