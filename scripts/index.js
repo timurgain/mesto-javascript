@@ -1,4 +1,5 @@
-// Profile const
+// Constants
+
 const profilePopup = document.querySelector('.profile-popup');
 const profileForm = document.forms['profile'];
 const profileFormName = profileForm.elements['name']
@@ -7,24 +8,17 @@ const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const profileEditBtn = document.querySelector('.profile__edit-btn');
 
-// Place const
 const placePopup = document.querySelector('.place-popup');
 const placeAddBtn = document.querySelector('.profile__add-btn');
 const placeForm = document.forms['place'];
 const placeFormName = placeForm.elements['name'];
 const placeFormLink = placeForm.elements['link'];
 
-// Card const
 const cardPopup = document.querySelector('.card-popup');
 
-// All close popup buttons
 const buttonsPopupClose = document.querySelectorAll('.popup__close-btn')
 
-buttonsPopupClose.forEach((btn) => {
-  btn.addEventListener('click', (evt) => {
-    closePopup(evt.target.closest('.popup'))
-  })
-})
+// Functions
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
@@ -44,8 +38,25 @@ function saveFormProfileValues() {
   profileDescription.textContent = profileFormDescription.value;
 }
 
+function getCardTemplate() {
+  const cardTemplateContent = document.querySelector('#card').content;
+  return cardTemplateContent.cloneNode(true);
+}
 
-// Popup - Edit Profile
+function createCard(cardLink, cardName) {
+  const card = getCardTemplate();
+  fillCardElement(card, cardLink, cardName);
+  return card;
+}
+
+// Listeners
+
+buttonsPopupClose.forEach((btn) => {
+  btn.addEventListener('click', (evt) => {
+    closePopup(evt.target.closest('.popup'))
+  })
+})
+
 
 profileEditBtn.addEventListener('click', () => {
   openPopup(profilePopup);
@@ -55,18 +66,18 @@ profileEditBtn.addEventListener('click', () => {
 profileForm.addEventListener('submit', (evt) => {
   saveFormProfileValues(); closePopup(profilePopup); evt.preventDefault()});
 
-// Popup - Add a Place
 
 placeAddBtn.addEventListener('click', () => openPopup(placePopup));
 
 placeForm.addEventListener('submit', (evt) => {
-
-  const card = getCardTemplate();
-  fillCardElement(card, placeFormLink.value, placeFormName.value);
+  const card = createCard(placeFormLink.value, placeFormName.value)
   addCardElementToCardList(card, where='prepend');
   closePopup(placePopup);
   evt.preventDefault();
 })
+
+
+
 
 // Card and Card popup
 
@@ -74,10 +85,7 @@ const popupCard = document.querySelector('#popup-card');
 const popupCardImage = popupCard.querySelector('.popup__image');
 const popupCardCaption = popupCard.querySelector('.popup__caption');
 
-function getCardTemplate() {
-  const cardTemplateContent = document.querySelector('#card').content;
-  return cardTemplateContent.cloneNode(true);
-}
+
 
 function fillCardElement(cardElement, cardLink, cardName) {
   if (cardLink.length < 1 || cardName.length < 1) return alert('Пустые поля');
@@ -154,7 +162,6 @@ const initialCards = [
 ];
 
 initialCards.forEach((initialCard) => {
-  const card = getCardTemplate();
-  fillCardElement(card, initialCard.link, initialCard.name);
+  const card = createCard(initialCard.link, initialCard.name);
   addCardElementToCardList(card);
 })
