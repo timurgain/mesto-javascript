@@ -20,7 +20,7 @@ const cardCaptionPopup = cardPopup.querySelector('.popup__caption');
 
 const cardList = document.querySelector('.elements__cards');
 
-const buttonsPopupClose = document.querySelectorAll('.popup__close-btn');
+const popupCloseButtons = document.querySelectorAll('.popup__close-btn');
 
 
 // Functions
@@ -75,10 +75,10 @@ function fillCardElement(cardElement, cardLink, cardName) {
   cardHeader.textContent = cardName;
   // event listeners
   cardLikeBtn.addEventListener(
-    'click', (evt) => {evt.target.classList.toggle('card__like-btn_active')}
+    'click', () => {cardLikeBtn.classList.toggle('card__like-btn_active')}
   );
   cardTrashBtn.addEventListener(
-    'click', (evt) => {evt.target.closest('li').remove()}
+    'click', () => {cardTrashBtn.closest('li').remove()}
   );
   cardImage.addEventListener(
     'click', () => {
@@ -93,9 +93,9 @@ function fillCardElement(cardElement, cardLink, cardName) {
 
 // Listeners
 
-buttonsPopupClose.forEach((btn) => {
-  btn.addEventListener('click', (evt) => {
-    closePopup(evt.target.closest('.popup'))
+popupCloseButtons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    closePopup(btn.closest('.popup'))
   })
 })
 
@@ -105,7 +105,10 @@ profileEditBtn.addEventListener('click', () => {
 });
 
 profileForm.addEventListener('submit', (evt) => {
-  saveFormProfileValues(); closePopup(profilePopup); evt.preventDefault()});
+  saveFormProfileValues();
+  closePopup(profilePopup);
+  evt.preventDefault();
+});
 
 placeAddBtn.addEventListener('click', () => openPopup(placePopup));
 
