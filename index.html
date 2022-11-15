@@ -61,9 +61,18 @@
       <button class="popup__close-btn" type="button"></button>
       <h2 class="popup__header">Редактировать профиль</h2>
 
-      <form class="popup__form" name="profile" action="#">
-        <input class="popup__input" name="name" type="text">
-        <input class="popup__input" name="description" type="text">
+      <form class="popup__form" name="profile" action="#" novalidate>
+
+        <label class="popup__field">
+          <input class="popup__input" name="name" type="text">
+          <span class="popup__error"></span>
+        </label>
+
+        <label class="popup__field">
+          <input class="popup__input popup__input_type_error" name="description" type="text">
+          <span class="popup__error"></span>
+        </label>
+
         <button class="popup__save-btn" type="submit">Сохранить</button>
       </form>
     </div>
@@ -75,11 +84,18 @@
       <button class="popup__close-btn" type="button"></button>
       <h2 class="popup__header">Новое место</h2>
 
-      <form class="popup__form" name="place" action="#">
-        <input class="popup__input" name="name" type="text"
-          placeholder="Название">
-        <input class="popup__input" name="link" type="text"
-          placeholder="Ссылка на картинку">
+      <form class="popup__form" name="place" action="#" novalidate>
+
+        <label class="popup__field">
+          <input class="popup__input" name="name" type="text" placeholder="Название">
+          <span class="popup__error"></span>
+        </label>
+
+        <label class="popup__field">
+          <input class="popup__input" name="link" type="text" placeholder="Ссылка на картинку">
+          <span class="popup__error"></span>
+        </label>
+
         <button class="popup__save-btn" type="submit">Создать</button>
       </form>
     </div>
@@ -101,5 +117,6 @@
   </footer>
 
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>
