@@ -64,12 +64,14 @@
       <form class="popup__form" name="profile" action="#" novalidate>
 
         <label class="popup__field">
-          <input class="popup__input" name="name" type="text">
+          <input class="popup__input" name="name" type="text"
+            required minlength="2" maxlength="40">
           <span class="popup__error"></span>
         </label>
 
         <label class="popup__field">
-          <input class="popup__input popup__input_type_error" name="description" type="text">
+          <input class="popup__input" name="description" type="text"
+            required minlength="2" maxlength="200">
           <span class="popup__error"></span>
         </label>
 
