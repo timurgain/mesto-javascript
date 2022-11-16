@@ -22,6 +22,11 @@
   cursor: pointer;
 }
 
+.popup__save-btn:disabled {
+  opacity: .2;
+  cursor: default;
+}
+
 .popup__save-btn:focus {
   opacity: .8;
 }

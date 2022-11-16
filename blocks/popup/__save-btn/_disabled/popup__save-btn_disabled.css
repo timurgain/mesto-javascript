@@ -1,8 +1,6 @@
 .popup__save-btn_disabled {
   border: 1px solid black;
   color: black;
-  cursor: default;
-  opacity: .2;
   background-color: rgba(0, 0, 0, 0);
   box-sizing: border-box;
 }
