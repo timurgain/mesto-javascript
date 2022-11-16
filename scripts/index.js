@@ -22,6 +22,8 @@ const cardList = document.querySelector('.elements__cards');
 
 const popupCloseButtons = document.querySelectorAll('.popup__close-btn');
 
+const popupSections = document.querySelectorAll('.popup');
+
 
 // Functions
 
@@ -98,6 +100,21 @@ popupCloseButtons.forEach((btn) => {
     closePopup(btn.closest('.popup'))
   })
 })
+
+popupSections.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target === popup) {
+      closePopup(popup);
+    }
+  });
+})
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.key !== 'Escape') return;
+  const popup = document.querySelector('.popup_opened');
+  if (!!popup === false) return;
+  closePopup(popup);
+});
 
 profileEditBtn.addEventListener('click', () => {
   openPopup(profilePopup);
