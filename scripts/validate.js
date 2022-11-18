@@ -1,78 +1,79 @@
 // Внутри страницы перебрать формы
 
-function enableValidation() {
-  const formList = Array.from(document.querySelectorAll(selectors.formSelector))
+function enableValidation({formSelector, ...selectors}) {
+  const formList = Array.from(document.querySelectorAll(formSelector))
 
   formList.forEach((formElement) => {
-    setEventListeners(formElement);
+    setEventListeners(formElement, selectors);
   })
 }
 
 // Внутри формы перебрать popup__field (popup__input, popup__error)
 
-function setEventListeners(formElement) {
-  const fieldList = Array.from(formElement.querySelectorAll(selectors.fieldSelector));
-  const submitButton = formElement.querySelector(selectors.submitButtonSelector);
+function setEventListeners(formElement, {fieldSelector, submitButtonSelector, ...selectors}) {
+  const fieldList = Array.from(formElement.querySelectorAll(fieldSelector));
+  const submitButton = formElement.querySelector(submitButtonSelector);
 
   // начальное состояние кнопки submit, на основе начальной валидности всех input формы
-  toggleButtonState(submitButton, fieldList);
+  toggleButtonState(submitButton, fieldList, selectors.inputSelector, selectors.inactiveButtonClass);
 
   // слушатель события input, срабатывает валидация
   fieldList.forEach((fieldElement) => {
     fieldElement.addEventListener(
       'input', () => {
-        checkInputValidity(fieldElement);
-        toggleButtonState(submitButton, fieldList);
+        checkInputValidity(fieldElement, selectors.inputSelector, selectors.errorSelector, selectors.inputErrorClass, selectors.errorClass);
+        toggleButtonState(submitButton, fieldList, selectors.inputSelector, selectors.inactiveButtonClass);
       });
   });
 }
 
 // Обработка инпута и его сообщения об ошибке валидации
 
-function checkInputValidity(fieldElement) {
-  const inputElement = fieldElement.querySelector(selectors.inputSelector);
-  const errorElement = fieldElement.querySelector(selectors.errorSelector);
+function checkInputValidity(fieldElement, {inputSelector, errorSelector, ...selectors}) {
+  const inputElement = fieldElement.querySelector(inputSelector);
+  const errorElement = fieldElement.querySelector(errorSelector);
   const isValid = inputElement.validity.valid
   if (isValid) {
-    hideInputError(inputElement, errorElement);
+    hideInputError(inputElement, errorElement, selectors.inputErrorClass, selectors.errorClass);
   } else {
-    showInputError(inputElement, errorElement);
+    showInputError(inputElement, errorElement, selectors.inputErrorClass, selectors.errorClass);
   };
 }
 
-function hideInputError(inputElement, errorElement) {
-  inputElement.classList.remove(selectors.inputErrorClass);
-  errorElement.classList.remove(selectors.errorClass);
+function hideInputError(inputElement, errorElement, inputErrorClass, errorClass) {
+  inputElement.classList.remove(inputErrorClass);
+  errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 }
 
-function showInputError(inputElement, errorElement) {
-  inputElement.classList.add(selectors.inputErrorClass);
-  errorElement.classList.add(selectors.errorClass);
+function showInputError(inputElement, errorElement, inputErrorClass, errorClass) {
+  inputElement.classList.add(inputErrorClass);
+  errorElement.classList.add(errorClass);
   errorElement.textContent = inputElement.validationMessage;
 }
 
 // Обработка кнопки submit
 
-function toggleButtonState(submitButton, fieldList) {
-  if (hasInvalidInput(fieldList)) {
-    submitButton.classList.add(selectors.inactiveButtonClass);
+function toggleButtonState(submitButton, fieldList, inputSelector, inactiveButtonClass) {
+  if (hasInvalidInput(fieldList, inputSelector)) {
+    submitButton.classList.add(inactiveButtonClass);
     submitButton.setAttribute('disabled', '');
   } else {
-    submitButton.classList.remove(selectors.inactiveButtonClass);
+    submitButton.classList.remove(inactiveButtonClass);
     submitButton.removeAttribute('disabled', '');
   }
 }
 
-function hasInvalidInput(fieldList) {
+function hasInvalidInput(fieldList, inputSelector) {
   return fieldList.some((fieldElement) => {
-    const inputElement = fieldElement.querySelector(selectors.inputSelector);
+    const inputElement = fieldElement.querySelector(inputSelector);
     return !inputElement.validity.valid;
   })
 }
 
+// Запуск всей ваидации
 
-const selectors = {
+enableValidation({
   formSelector: '.popup__form',
   fieldSelector: '.popup__field',
   inputSelector: '.popup__input',
@@ -82,6 +83,4 @@ const selectors = {
   inactiveButtonClass: 'popup__save-btn_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
-}
-
-enableValidation()
+})
