@@ -29,10 +29,19 @@ const popupSections = document.querySelectorAll('.popup');
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
+  document.addEventListener('keydown', escapeHandler);
 }
 
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
+  document.removeEventListener('keydown', escapeHandler);
+}
+
+function escapeHandler(evt) {
+  if (evt.key !== 'Escape') return;
+  const popup = document.querySelector('.popup_opened');
+  if (!!popup === false) return;
+  closePopup(popup);
 }
 
 function fillFormProfile() {
@@ -92,8 +101,17 @@ function fillCardElement(cardElement, cardLink, cardName) {
   );
 }
 
+// function escapeHandler(evt) {
+//   if (evt.key !== 'Escape') return;
+//   const popup = document.querySelector('.popup_opened');
+//   if (!!popup === false) return;
+//   closePopup(popup);
+// }
+
 
 // Listeners
+
+// document.addEventListener('keydown', escapeHandler);
 
 popupCloseButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -108,13 +126,6 @@ popupSections.forEach((popup) => {
     }
   });
 })
-
-document.addEventListener('keydown', (evt) => {
-  if (evt.key !== 'Escape') return;
-  const popup = document.querySelector('.popup_opened');
-  if (!!popup === false) return;
-  closePopup(popup);
-});
 
 profileEditBtn.addEventListener('click', () => {
   openPopup(profilePopup);
