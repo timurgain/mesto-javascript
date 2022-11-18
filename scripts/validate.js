@@ -14,17 +14,25 @@ function setEventListeners(formElement, {fieldSelector, submitButtonSelector, ..
   const fieldList = Array.from(formElement.querySelectorAll(fieldSelector));
   const submitButton = formElement.querySelector(submitButtonSelector);
 
-  // submit button initial state
-  toggleButtonState(submitButton, fieldList, selectors.inputSelector, selectors.inactiveButtonClass);
+  // submit button initial state is setting in popup opening (const btns from index.js)
+  [profileEditBtn, placeAddBtn].forEach((button) => {
+    button.addEventListener(
+      'click', () => {
+        const isFormValid = !hasInvalidInput(fieldList, selectors.inputSelector);
+        toggleButtonState(submitButton, selectors.inactiveButtonClass, isFormValid);
+      });
+  })
 
-  // input-event listener
+  // input-event listener, realtime validation
   fieldList.forEach((fieldElement) => {
     fieldElement.addEventListener(
       'input', () => {
         checkInputValidity(fieldElement, selectors.inputSelector, selectors.errorSelector, selectors.inputErrorClass, selectors.errorClass);
-        toggleButtonState(submitButton, fieldList, selectors.inputSelector, selectors.inactiveButtonClass);
+        const isFormValid = !hasInvalidInput(fieldList, selectors.inputSelector);
+        toggleButtonState(submitButton, selectors.inactiveButtonClass, isFormValid);
       });
   });
+
 }
 
 // Input and error message handling
@@ -54,13 +62,13 @@ function showInputError(inputElement, errorElement, inputErrorClass, errorClass)
 
 // Submit button handling
 
-function toggleButtonState(submitButton, fieldList, inputSelector, inactiveButtonClass) {
-  if (hasInvalidInput(fieldList, inputSelector)) {
-    submitButton.classList.add(inactiveButtonClass);
-    submitButton.setAttribute('disabled', '');
-  } else {
+function toggleButtonState(submitButton, inactiveButtonClass, isFormValid) {
+  if (isFormValid) {
     submitButton.classList.remove(inactiveButtonClass);
     submitButton.removeAttribute('disabled', '');
+  } else {
+    submitButton.classList.add(inactiveButtonClass);
+    submitButton.setAttribute('disabled', '');
   }
 }
 

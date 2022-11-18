@@ -28,6 +28,7 @@ const popupSections = document.querySelectorAll('.popup');
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
   document.addEventListener('keydown', escapeHandler);
+
 }
 
 function closePopup(popupElement) {
@@ -169,4 +170,4 @@ const initialCards = [
 initialCards.forEach((initialCard) => {
   const card = createCard(initialCard.link, initialCard.name);
   addCardElementToCardList(card);
-})
+});
