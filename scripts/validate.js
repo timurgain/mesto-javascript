@@ -1,4 +1,4 @@
-// Внутри страницы перебрать формы
+// Inside document, browse forms
 
 function enableValidation({formSelector, ...selectors}) {
   const formList = Array.from(document.querySelectorAll(formSelector))
@@ -8,16 +8,16 @@ function enableValidation({formSelector, ...selectors}) {
   })
 }
 
-// Внутри формы перебрать popup__field (popup__input, popup__error)
+// Inside one form, browse popup__field (popup__input, popup__error)
 
 function setEventListeners(formElement, {fieldSelector, submitButtonSelector, ...selectors}) {
   const fieldList = Array.from(formElement.querySelectorAll(fieldSelector));
   const submitButton = formElement.querySelector(submitButtonSelector);
 
-  // начальное состояние кнопки submit, на основе начальной валидности всех input формы
+  // submit button initial state
   toggleButtonState(submitButton, fieldList, selectors.inputSelector, selectors.inactiveButtonClass);
 
-  // слушатель события input, срабатывает валидация
+  // input-event listener
   fieldList.forEach((fieldElement) => {
     fieldElement.addEventListener(
       'input', () => {
@@ -27,16 +27,16 @@ function setEventListeners(formElement, {fieldSelector, submitButtonSelector, ..
   });
 }
 
-// Обработка инпута и его сообщения об ошибке валидации
+// Input and error message handling
 
-function checkInputValidity(fieldElement, {inputSelector, errorSelector, ...selectors}) {
+function checkInputValidity(fieldElement, inputSelector, errorSelector, inputErrorClass, errorClass) {
   const inputElement = fieldElement.querySelector(inputSelector);
   const errorElement = fieldElement.querySelector(errorSelector);
   const isValid = inputElement.validity.valid
   if (isValid) {
-    hideInputError(inputElement, errorElement, selectors.inputErrorClass, selectors.errorClass);
+    hideInputError(inputElement, errorElement, inputErrorClass, errorClass);
   } else {
-    showInputError(inputElement, errorElement, selectors.inputErrorClass, selectors.errorClass);
+    showInputError(inputElement, errorElement, inputErrorClass, errorClass);
   };
 }
 
@@ -52,7 +52,7 @@ function showInputError(inputElement, errorElement, inputErrorClass, errorClass)
   errorElement.textContent = inputElement.validationMessage;
 }
 
-// Обработка кнопки submit
+// Submit button handling
 
 function toggleButtonState(submitButton, fieldList, inputSelector, inactiveButtonClass) {
   if (hasInvalidInput(fieldList, inputSelector)) {
@@ -71,7 +71,7 @@ function hasInvalidInput(fieldList, inputSelector) {
   })
 }
 
-// Запуск всей ваидации
+// Start validation
 
 enableValidation({
   formSelector: '.popup__form',
@@ -79,7 +79,6 @@ enableValidation({
   inputSelector: '.popup__input',
   errorSelector: '.popup__error',
   submitButtonSelector: '.popup__save-btn',
-  // no dots, use for classList
   inactiveButtonClass: 'popup__save-btn_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'

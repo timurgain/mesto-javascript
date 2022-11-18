@@ -1,5 +1,3 @@
-// Global Constants
-
 const profilePopup = document.querySelector('.profile-popup');
 const profileForm = document.forms['profile'];
 const profileFormName = profileForm.elements['name'];
@@ -101,17 +99,7 @@ function fillCardElement(cardElement, cardLink, cardName) {
   );
 }
 
-// function escapeHandler(evt) {
-//   if (evt.key !== 'Escape') return;
-//   const popup = document.querySelector('.popup_opened');
-//   if (!!popup === false) return;
-//   closePopup(popup);
-// }
-
-
 // Listeners
-
-// document.addEventListener('keydown', escapeHandler);
 
 popupCloseButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
