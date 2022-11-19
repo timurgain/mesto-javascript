@@ -71,7 +71,6 @@ function addCardElementToCardList(cardElement, where='append') {
 }
 
 function fillCardElement(cardElement, cardLink, cardName) {
-  if (cardLink.length < 1 || cardName.length < 1) return alert('Пустые поля');
   // constants
   const cardImage = cardElement.querySelector('.card__image');
   const cardHeader = cardElement.querySelector('.card__header');
@@ -110,6 +109,7 @@ placeAddBtn.addEventListener('click', () => openPopup(placePopup));
 profileForm.addEventListener('submit', (evt) => {
   saveFormProfileValues();
   closePopup(profilePopup);
+  profileForm.reset();
   evt.preventDefault();
 });
 
