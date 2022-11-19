@@ -18,8 +18,6 @@ const cardCaptionPopup = cardPopup.querySelector('.popup__caption');
 
 const cardList = document.querySelector('.elements__cards');
 
-const popupCloseButtons = document.querySelectorAll('.popup__close-btn');
-
 const popupSections = document.querySelectorAll('.popup');
 
 
@@ -102,24 +100,12 @@ function fillCardElement(cardElement, cardLink, cardName) {
 
 // Listeners
 
-popupCloseButtons.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    closePopup(btn.closest('.popup'))
-  })
-})
-
-popupSections.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target === popup) {
-      closePopup(popup);
-    }
-  });
-})
-
 profileEditBtn.addEventListener('click', () => {
   openPopup(profilePopup);
   fillFormProfile();
 });
+
+placeAddBtn.addEventListener('click', () => openPopup(placePopup));
 
 profileForm.addEventListener('submit', (evt) => {
   saveFormProfileValues();
@@ -127,7 +113,13 @@ profileForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 });
 
-placeAddBtn.addEventListener('click', () => openPopup(placePopup));
+popupSections.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if ((evt.target === popup) || (evt.target.classList.contains('popup__close-btn'))) {
+      closePopup(popup);
+    }
+  })
+})
 
 placeForm.addEventListener('submit', (evt) => {
   const card = createCard(placeFormLink.value, placeFormName.value)

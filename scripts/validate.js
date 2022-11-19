@@ -10,18 +10,22 @@ function enableValidation({formSelector, ...selectors}) {
 
 // Inside one form, browse popup__field (popup__input, popup__error)
 
-function setEventListeners(formElement, {fieldSelector, submitButtonSelector, ...selectors}) {
+function setEventListeners(formElement, {fieldSelector, submitButtonSelector, openPopupButtonsList, ...selectors}) {
   const fieldList = Array.from(formElement.querySelectorAll(fieldSelector));
   const submitButton = formElement.querySelector(submitButtonSelector);
 
   // submit button initial state is setting in popup opening (const btns from index.js)
-  [profileEditBtn, placeAddBtn].forEach((button) => {
+
+
+  openPopupButtonsList.forEach((button) => {
     button.addEventListener(
       'click', () => {
         const isFormValid = !hasInvalidInput(fieldList, selectors.inputSelector);
         toggleButtonState(submitButton, selectors.inactiveButtonClass, isFormValid);
       });
   })
+
+
 
   // input-event listener, realtime validation
   fieldList.forEach((fieldElement) => {
@@ -87,6 +91,7 @@ enableValidation({
   inputSelector: '.popup__input',
   errorSelector: '.popup__error',
   submitButtonSelector: '.popup__save-btn',
+  openPopupButtonsList: [profileEditBtn, placeAddBtn],
   inactiveButtonClass: 'popup__save-btn_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
