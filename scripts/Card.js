@@ -39,13 +39,8 @@ class Card {
       this._cardTrashBtn.addEventListener(
         'click', () => {this._cardTrashBtn.closest('li').remove()}
       );
-      // this._cardImage.addEventListener(
-      //   'click', () => {
-      //     cardImagePopup.src = cardImage.src;
-      //     cardImagePopup.alt = cardImage.alt;
-      //     cardCaptionPopup.textContent = cardHeader.textContent;
-      //     openPopup(cardPopup);
-      //   }
-      // );
+      this._cardImage.addEventListener(
+        'click', () => {openCardImagePopup(this._cardImage, this._cardHeader)}
+      );
   }
 }

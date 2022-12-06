@@ -1,28 +1,3 @@
-const selectors = {
-  formSelector: '.popup__form',
-  fieldSelector: '.popup__field',
-  inputSelector: '.popup__input',
-  errorSelector: '.popup__error',
-  submitButtonSelector: '.popup__save-btn',
-  inactiveButtonClass: 'popup__save-btn_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-}
-
-
-// function startPageValidation(selectors) {
-//   const formList = Array.from(document.querySelectorAll(selectors.formSelector));
-//   console.log(formList);
-//   formList.forEach((formElement) => {
-//     console.log(formElement);
-//     console.log(selectors);
-//     const formValidation = new FormValidator(selectors, formElement);
-//     formValidation.enableValidation();
-//   })
-// }
-
-// startPageValidation(selectors)
-
 class FormValidator {
   constructor(selectors, formElement) {
     this.selectors = selectors;
@@ -98,11 +73,3 @@ class FormValidator {
     }
   }
 }
-
-
-const formList = Array.from(document.querySelectorAll(selectors.formSelector));
-formList.forEach((formElement) => {
-  console.log(FormValidator);
-  const form = new FormValidator(selectors, formElement);
-  form.enableValidation();
-})
