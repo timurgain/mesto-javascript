@@ -16,7 +16,7 @@ class Card {
   }
 
   _getCardElement() {
-    return Card._template.cloneNode(true)
+    return Card._template.cloneNode(true).children[0];
   }
 
   _makeCardElementSelectors() {

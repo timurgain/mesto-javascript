@@ -51,17 +51,6 @@ function saveFormProfileValues() {
   profileDescription.textContent = profileFormDescription.value;
 }
 
-// function getCardTemplate() {
-//   const cardTemplateContent = document.querySelector('#card').content;
-//   return cardTemplateContent.cloneNode(true);
-// }
-
-// function createCard(cardLink, cardName) {
-//   const card = getCardTemplate();
-//   fillCardElement(card, cardLink, cardName);
-//   return card;
-// }
-
 function addCardElementToCardList(cardElement, where='append') {
   if (where === 'prepend') {
     cardList.prepend(cardElement);
@@ -69,33 +58,6 @@ function addCardElementToCardList(cardElement, where='append') {
     cardList.append(cardElement);
   };
 }
-
-// function fillCardElement(cardElement, cardLink, cardName) {
-//   // constants
-//   const cardImage = cardElement.querySelector('.card__image');
-//   const cardHeader = cardElement.querySelector('.card__header');
-//   const cardLikeBtn = cardElement.querySelector('.card__like-btn');
-//   const cardTrashBtn = cardElement.querySelector('.card__trash-btn')
-//   // attributes and text
-//   cardImage.setAttribute('src', cardLink);
-//   cardImage.setAttribute('alt', `Изображение: ${cardName}`);
-//   cardHeader.textContent = cardName;
-//   // event listeners
-//   cardLikeBtn.addEventListener(
-//     'click', () => {cardLikeBtn.classList.toggle('card__like-btn_active')}
-//   );
-//   cardTrashBtn.addEventListener(
-//     'click', () => {cardTrashBtn.closest('li').remove()}
-//   );
-//   cardImage.addEventListener(
-//     'click', () => {
-//       cardImagePopup.src = cardImage.src;
-//       cardImagePopup.alt = cardImage.alt;
-//       cardCaptionPopup.textContent = cardHeader.textContent;
-//       openPopup(cardPopup);
-//     }
-//   );
-// }
 
 // Listeners
 
@@ -122,8 +84,8 @@ popupSections.forEach((popup) => {
 })
 
 placeForm.addEventListener('submit', (evt) => {
-  const card = createCard(placeFormLink.value, placeFormName.value)
-  addCardElementToCardList(card, where='prepend');
+  const card = new Card(placeFormLink.value, placeFormName.value);
+  addCardElementToCardList(card.createCard(), where='prepend');
   closePopup(placePopup);
   placeForm.reset();
   evt.preventDefault();
@@ -162,7 +124,4 @@ const initialCards = [
 initialCards.forEach((initialCard) => {
   const card = new Card(initialCard.link, initialCard.name);
   addCardElementToCardList(card.createCard());
-
-  // const card = createCard(initialCard.link, initialCard.name);
-  // addCardElementToCardList(card);
 });
