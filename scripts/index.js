@@ -12,10 +12,6 @@ const placeForm = document.forms['place'];
 const placeFormName = placeForm.elements['name'];
 const placeFormLink = placeForm.elements['link'];
 
-const cardPopup = document.querySelector('.card-popup');
-const cardImagePopup = cardPopup.querySelector('.popup__image');
-const cardCaptionPopup = cardPopup.querySelector('.popup__caption');
-
 const cardList = document.querySelector('.elements__cards');
 
 const popupSections = document.querySelectorAll('.popup');
@@ -47,7 +43,14 @@ const initialCards = [
   }
 ];
 
-const selectors = {
+const cardSelectors = {
+  cardTemplateSelector: '#card',
+  cardPopupSelector: '.card-popup',
+  cardImagePopupSelector: '.popup__image',
+  cardCaptionPopupSelector: '.popup__image'
+}
+
+const formSelectors = {
   formSelector: '.popup__form',
   fieldSelector: '.popup__field',
   inputSelector: '.popup__input',
@@ -58,7 +61,7 @@ const selectors = {
   errorClass: 'popup__error_visible'
 }
 
-const formList = Array.from(document.querySelectorAll(selectors.formSelector));
+const formList = Array.from(document.querySelectorAll(formSelectors.formSelector));
 
 
 // Core functions
@@ -120,14 +123,14 @@ popupSections.forEach((popup) => {
 })
 
 placeForm.addEventListener('submit', (evt) => {
-  const card = new Card(placeFormLink.value, placeFormName.value);
+  const card = new Card(placeFormLink.value, placeFormName.value, cardSelectors);
   addCardElementToCardList(card.createCard(), where='prepend');
   closePopup(placePopup);
   placeForm.reset();
   evt.preventDefault();
 })
 
-// Open popup listeners / functions
+// Open popup listeners
 
 placeAddBtn.addEventListener('click', () => openPopup(placePopup));
 
@@ -136,24 +139,17 @@ profileEditBtn.addEventListener('click', () => {
   fillFormProfile();
 });
 
-function openCardImagePopup(cardImageElement, cardHeaderElement) {
-  cardImagePopup.src = cardImageElement.src;
-  cardImagePopup.alt = cardImageElement.alt;
-  cardCaptionPopup.textContent = cardHeaderElement.textContent;
-  openPopup(cardPopup);
-}
-
 
 // Procedures
 
 // Filling the inital cards
 initialCards.forEach((initialCard) => {
-  const card = new Card(initialCard.link, initialCard.name);
+  const card = new Card(initialCard.link, initialCard.name, cardSelectors);
   addCardElementToCardList(card.createCard());
 });
 
 // Enable forms validation
 formList.forEach((formElement) => {
-  const form = new FormValidator(selectors, formElement);
+  const form = new FormValidator (formSelectors, formElement);
   form.enableValidation();
 })
