@@ -1,76 +1,15 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-
-const profilePopup = document.querySelector('.profile-popup');
-const profileForm = document.forms['profile'];
-const profileFormName = profileForm.elements['name'];
-const profileFormDescription = profileForm.elements['description'];
-const profileName = document.querySelector('.profile__name');
-const profileDescription = document.querySelector('.profile__description');
-const profileEditBtn = document.querySelector('.profile__edit-btn');
-
-const placePopup = document.querySelector('.place-popup');
-const placeAddBtn = document.querySelector('.profile__add-btn');
-const placeForm = document.forms['place'];
-const placeFormName = placeForm.elements['name'];
-const placeFormLink = placeForm.elements['link'];
-
-const cardPopup = document.querySelector('.card-popup');
-const cardImagePopup = cardPopup.querySelector('.popup__image');
-const cardCaptionPopup = cardPopup.querySelector('.popup__caption');
-
-const cardList = document.querySelector('.elements__cards');
-
-const popupSections = document.querySelectorAll('.popup');
-
-const initialCards = [
-  {
-    name: 'Северный чуйский хребет',
-    link: 'images/chuiskiy-hrebet.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'images/kamchatka.jpg'
-  },
-  {
-    name: 'Суздаль',
-    link: 'images/suzdal.jpg'
-  },
-  {
-    name: 'Ольхон',
-    link: 'images/olhon.jpg'
-  },
-  {
-    name: 'Териберка',
-    link: 'images/teriberka.jpg'
-  },
-  {
-    name: 'Уральские горы',
-    link: 'images/ural.jpg'
-  }
-];
-
-const cardSelectors = {
-  cardImageSelector: '.card__image',
-  cardHeaderSelector: '.card__header',
-  cardLikeBtnSelector: '.card__like-btn',
-  cardLikeBtnActive: 'card__like-btn_active',
-  cardTrashBtnSelector: '.card__trash-btn'
-}
-
-const formSelectors = {
-  formSelector: '.popup__form',
-  fieldSelector: '.popup__field',
-  inputSelector: '.popup__input',
-  errorSelector: '.popup__error',
-  submitButtonSelector: '.popup__save-btn',
-  inactiveButtonClass: 'popup__save-btn_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-}
-
-const formList = Array.from(document.querySelectorAll(formSelectors.formSelector));
-
+import { profilePopup, profileForm, profileFormName, profileFormDescription, profileName, profileDescription, profileEditBtn,
+         placePopup, placeAddBtn, placeForm, placeFormName, placeFormLink,
+         cardPopup, cardImagePopup, cardCaptionPopup,
+         cardList,
+         popupSections,
+         initialCards,
+         cardSelectors,
+         formSelectors,
+         formList } from './constants.js'
+         
 
 // Popup Functions
 
