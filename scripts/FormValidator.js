@@ -1,4 +1,4 @@
-class FormValidator {
+export class FormValidator {
   constructor (formSelectors, formElement) {
     this.formSelectors = formSelectors;
     this.formElement = formElement;
@@ -30,7 +30,6 @@ class FormValidator {
         this._toggleButtonState();
       }, 0);
     });
-
   }
 
   _checkInputValidity(fieldElement) {

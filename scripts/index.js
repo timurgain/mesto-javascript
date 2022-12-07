@@ -1,3 +1,6 @@
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
 const profilePopup = document.querySelector('.profile-popup');
 const profileForm = document.forms['profile'];
 const profileFormName = profileForm.elements['name'];
@@ -11,6 +14,10 @@ const placeAddBtn = document.querySelector('.profile__add-btn');
 const placeForm = document.forms['place'];
 const placeFormName = placeForm.elements['name'];
 const placeFormLink = placeForm.elements['link'];
+
+const cardPopup = document.querySelector('.card-popup');
+const cardImagePopup = cardPopup.querySelector('.popup__image');
+const cardCaptionPopup = cardPopup.querySelector('.popup__caption');
 
 const cardList = document.querySelector('.elements__cards');
 
@@ -44,10 +51,11 @@ const initialCards = [
 ];
 
 const cardSelectors = {
-  cardTemplateSelector: '#card',
-  cardPopupSelector: '.card-popup',
-  cardImagePopupSelector: '.popup__image',
-  cardCaptionPopupSelector: '.popup__image'
+  cardImageSelector: '.card__image',
+  cardHeaderSelector: '.card__header',
+  cardLikeBtnSelector: '.card__like-btn',
+  cardLikeBtnActive: 'card__like-btn_active',
+  cardTrashBtnSelector: '.card__trash-btn'
 }
 
 const formSelectors = {
@@ -62,17 +70,6 @@ const formSelectors = {
 }
 
 const formList = Array.from(document.querySelectorAll(formSelectors.formSelector));
-
-
-// Core functions
-
-function addCardElementToCardList(cardElement, where='append') {
-  if (where === 'prepend') {
-    cardList.prepend(cardElement);
-  } else {
-    cardList.append(cardElement);
-  };
-}
 
 
 // Popup Functions
@@ -105,6 +102,13 @@ function saveFormProfileValues() {
   profileDescription.textContent = profileFormDescription.value;
 }
 
+function openCardImagePopup(cardImage, cardHeader) {
+  cardImagePopup.src = cardImage.src;
+  cardImagePopup.alt = cardImage.alt;
+  cardCaptionPopup.textContent = cardHeader.textContent;
+  openPopup(cardPopup);
+}
+
 // Popup Listeners
 
 profileForm.addEventListener('submit', (evt) => {
@@ -123,11 +127,12 @@ popupSections.forEach((popup) => {
 })
 
 placeForm.addEventListener('submit', (evt) => {
-  const card = new Card(placeFormLink.value, placeFormName.value, cardSelectors);
-  addCardElementToCardList(card.createCard(), where='prepend');
+  evt.preventDefault();
+  const card = new Card(placeFormLink.value, placeFormName.value, cardSelectors, openCardImagePopup);
+  addCardElementToCardList(card.createCard(), 'prepend');
   closePopup(placePopup);
   placeForm.reset();
-  evt.preventDefault();
+
 })
 
 // Open popup listeners
@@ -139,17 +144,26 @@ profileEditBtn.addEventListener('click', () => {
   fillFormProfile();
 });
 
+// Core functions
+
+function addCardElementToCardList(cardElement, where='append') {
+  if (where === 'prepend') {
+    cardList.prepend(cardElement);
+  } else {
+    cardList.append(cardElement);
+  };
+}
 
 // Procedures
 
 // Filling the inital cards
 initialCards.forEach((initialCard) => {
-  const card = new Card(initialCard.link, initialCard.name, cardSelectors);
+  const card = new Card(initialCard.link, initialCard.name, cardSelectors, openCardImagePopup);
   addCardElementToCardList(card.createCard());
 });
 
 // Enable forms validation
 formList.forEach((formElement) => {
-  const form = new FormValidator (formSelectors, formElement);
+  const form = new FormValidator(formSelectors, formElement);
   form.enableValidation();
 })
