@@ -1,52 +1,16 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-import { profilePopup, profileForm, profileFormName, profileFormDescription, profileName, profileDescription, profileEditBtn,
+import { profilePopup, profileForm, profileEditBtn,
          placePopup, placeAddBtn, placeForm, placeFormName, placeFormLink,
-         cardPopup, cardImagePopup, cardCaptionPopup,
-         cardList,
          popupSections,
          initialCards,
          cardSelectors,
          formSelectors,
          formList } from './constants.js'
-         
+import { openPopup, closePopup, fillFormProfile, saveFormProfileValues,
+         openCardImagePopup,
+         addCardElementToCardList } from './utils.js'
 
-// Popup Functions
-
-function openPopup(popupElement) {
-  popupElement.classList.add('popup_opened');
-  document.addEventListener('keydown', handleEscape);
-
-}
-
-function closePopup(popupElement) {
-  popupElement.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleEscape);
-}
-
-function handleEscape(evt) {
-  if (evt.key !== 'Escape') return;
-  const popup = document.querySelector('.popup_opened');
-  if (!!popup === false) return;
-  closePopup(popup);
-}
-
-function fillFormProfile() {
-  profileFormName.value = profileName.textContent;
-  profileFormDescription.value = profileDescription.textContent;
-}
-
-function saveFormProfileValues() {
-  profileName.textContent = profileFormName.value;
-  profileDescription.textContent = profileFormDescription.value;
-}
-
-function openCardImagePopup(cardImage, cardHeader) {
-  cardImagePopup.src = cardImage.src;
-  cardImagePopup.alt = cardImage.alt;
-  cardCaptionPopup.textContent = cardHeader.textContent;
-  openPopup(cardPopup);
-}
 
 // Popup Listeners
 
@@ -83,15 +47,6 @@ profileEditBtn.addEventListener('click', () => {
   fillFormProfile();
 });
 
-// Core functions
-
-function addCardElementToCardList(cardElement, where='append') {
-  if (where === 'prepend') {
-    cardList.prepend(cardElement);
-  } else {
-    cardList.append(cardElement);
-  };
-}
 
 // Procedures
 
