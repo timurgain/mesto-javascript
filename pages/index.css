@@ -46,5 +46,7 @@
 @import url(../blocks/popup/__image/popup__image.css);
 @import url(../blocks/popup/__caption/popup__caption.css);
 
+@import url(../blocks/card-popup/card-popup.css);  /* modifier */
+
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__paragraph/footer__paragraph.css);
