@@ -1,6 +1,8 @@
 import { profileFormName, profileFormDescription, profileName, profileDescription,
          cardPopup, cardImagePopup, cardCaptionPopup,
-         cardList } from './constants.js'
+         cardList,
+         cardSelectors } from './constants.js'
+import { Card } from './Card.js';
 
 
 // Popup Functions
@@ -42,6 +44,12 @@ export function openCardImagePopup(cardImage, cardHeader) {
 
 
 // Core functions
+
+export function createCard(imgSrc, header) {
+  const card = new Card(imgSrc, header,
+                        cardSelectors, openCardImagePopup);
+  return card.createCard()
+}
 
 export function addCardElementToCardList(cardElement, where='append') {
   if (where === 'prepend') {

@@ -9,7 +9,7 @@ import { profilePopup, profileForm, profileEditBtn,
          formList } from './constants.js'
 import { openPopup, closePopup, fillFormProfile, saveFormProfileValues,
          openCardImagePopup,
-         addCardElementToCardList } from './utils.js'
+         addCardElementToCardList, createCard } from './utils.js'
 
 
 // Popup Listeners
@@ -31,8 +31,7 @@ popupSections.forEach((popup) => {
 
 placeForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  const card = new Card(placeFormLink.value, placeFormName.value, cardSelectors, openCardImagePopup);
-  addCardElementToCardList(card.createCard(), 'prepend');
+  addCardElementToCardList(createCard(placeFormLink.value, placeFormName.value), 'prepend');
   closePopup(placePopup);
   placeForm.reset();
 
@@ -52,8 +51,7 @@ profileEditBtn.addEventListener('click', () => {
 
 // Filling the inital cards
 initialCards.forEach((initialCard) => {
-  const card = new Card(initialCard.link, initialCard.name, cardSelectors, openCardImagePopup);
-  addCardElementToCardList(card.createCard());
+  addCardElementToCardList(createCard(initialCard.link, initialCard.name));
 });
 
 // Enable forms validation
