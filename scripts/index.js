@@ -1,14 +1,11 @@
-import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 import { profilePopup, profileForm, profileEditBtn,
          placePopup, placeAddBtn, placeForm, placeFormName, placeFormLink,
          popupSections,
          initialCards,
-         cardSelectors,
          formSelectors,
          formList } from './constants.js'
 import { openPopup, closePopup, fillFormProfile, saveFormProfileValues,
-         openCardImagePopup,
          addCardElementToCardList, createCard } from './utils.js'
 
 
