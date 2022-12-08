@@ -39,7 +39,7 @@ export class Card {
       'click', () => {this._cardLikeBtn.classList.toggle(this._cardSelectors.cardLikeBtnActive)}
     );
     this._cardTrashBtn.addEventListener(
-      'click', () => {this._cardTrashBtn.closest('li').remove()}
+      'click', () => {this._cardElement.remove()}
     );
     this._cardImage.addEventListener(
       'click', () => this._openCardImagePopup(this._cardImage, this._cardHeader)
