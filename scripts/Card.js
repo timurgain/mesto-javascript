@@ -1,6 +1,6 @@
 export class Card {
 
-  static _template = document.querySelector('#card').content;
+  static _template = document.querySelector('#card').content.children[0];
 
   constructor(imgSrc, header, cardSelectors, openCardImagePopup) {
     this._imgSrc = imgSrc;
@@ -18,7 +18,7 @@ export class Card {
   }
 
   _getCardElement() {
-    return Card._template.cloneNode(true).children[0];
+    return Card._template.cloneNode(true);
   }
 
   _defineCardElements() {
