@@ -16,8 +16,6 @@ export const cardPopup = document.querySelector('.card-popup');
 export const cardImagePopup = cardPopup.querySelector('.popup__image');
 export const cardCaptionPopup = cardPopup.querySelector('.popup__caption');
 
-export const cardList = document.querySelector('.elements__cards');
-
 export const popupSections = document.querySelectorAll('.popup');
 
 export const initialCards = [

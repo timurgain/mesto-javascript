@@ -1,12 +1,29 @@
-import { FormValidator } from './FormValidator.js';
+import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 import { profilePopup, profileForm, profileEditBtn,
          placePopup, placeAddBtn, placeForm, placeFormName, placeFormLink,
          popupSections,
          initialCards,
          formSelectors,
          formList } from './constants.js'
-import { openPopup, closePopup, fillFormProfile, saveFormProfileValues,
-         addCardElementToCardList, createCard } from './utils.js'
+import { openPopup, closePopup, fillFormProfile, saveFormProfileValues, createCard } from './utils.js'
+
+
+// Create section with cards
+const sectionCard = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => createCard(item.link, item.name)
+  },
+  '.elements__cards'
+);
+sectionCard.renderItems()
+
+// Enable forms validation
+formList.forEach((formElement) => {
+  const form = new FormValidator(formSelectors, formElement);
+  form.enableValidation();
+})
 
 
 // Popup Listeners
@@ -28,7 +45,8 @@ popupSections.forEach((popup) => {
 
 placeForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  addCardElementToCardList(createCard(placeFormLink.value, placeFormName.value), 'prepend');
+  const item = createCard(placeFormLink.value, placeFormName.value);
+  sectionCard.addItem(item, 'prepend');
   closePopup(placePopup);
   placeForm.reset();
 
@@ -43,16 +61,3 @@ profileEditBtn.addEventListener('click', () => {
   fillFormProfile();
 });
 
-
-// Procedures
-
-// Filling the inital cards
-initialCards.forEach((initialCard) => {
-  addCardElementToCardList(createCard(initialCard.link, initialCard.name));
-});
-
-// Enable forms validation
-formList.forEach((formElement) => {
-  const form = new FormValidator(formSelectors, formElement);
-  form.enableValidation();
-})

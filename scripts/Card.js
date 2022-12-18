@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
 
   static _template = document.querySelector('#card').content.children[0];
 
