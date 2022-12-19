@@ -2,11 +2,11 @@ export default class Card {
 
   static _template = document.querySelector('#card').content.children[0];
 
-  constructor(imgSrc, header, cardSelectors, openCardImagePopup) {
+  constructor(imgSrc, header, cardSelectors, handleCardClick) {
     this._imgSrc = imgSrc;
     this._header = header;
     this._cardSelectors = cardSelectors;
-    this._openCardImagePopup = openCardImagePopup;
+    this._handleCardClick = handleCardClick;
   }
 
   createCard() {
@@ -42,7 +42,7 @@ export default class Card {
       'click', () => {this._cardElement.remove()}
     );
     this._cardImage.addEventListener(
-      'click', () => this._openCardImagePopup(this._cardImage, this._cardHeader)
+      'click', () => this._handleCardClick(this._cardImage, this._cardHeader)
     );
   }
 }

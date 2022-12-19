@@ -12,11 +12,7 @@ export const placeForm = document.forms['place'];
 export const placeFormName = placeForm.elements['name'];
 export const placeFormLink = placeForm.elements['link'];
 
-export const cardPopup = document.querySelector('.card-popup');
-export const cardImagePopup = cardPopup.querySelector('.popup__image');
-export const cardCaptionPopup = cardPopup.querySelector('.popup__caption');
-
-export const popupSections = document.querySelectorAll('.popup');
+// export const popupSections = document.querySelectorAll('.popup');
 
 export const initialCards = [
   {
@@ -44,6 +40,12 @@ export const initialCards = [
     link: 'images/ural.jpg'
   }
 ];
+
+export const popupCardImageSelectors = {
+  popupSelector: '.card-popup',
+  cardImagePopup: '.popup__image',
+  cardCaptionPopup: '.popup__caption'
+}
 
 export const cardSelectors = {
   cardImageSelector: '.card__image',

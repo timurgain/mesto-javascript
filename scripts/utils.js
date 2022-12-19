@@ -1,28 +1,10 @@
 import { profileFormName, profileFormDescription, profileName, profileDescription,
-         cardPopup, cardImagePopup, cardCaptionPopup,
-         cardSelectors } from './constants.js'
+         cardSelectors } from './constants.js';
 import Card from './Card.js';
+import { popupWithImage } from './index.js';
 
 
 // Popup Functions
-
-export function openPopup(popupElement) {
-  popupElement.classList.add('popup_opened');
-  document.addEventListener('keydown', handleEscape);
-
-}
-
-export function closePopup(popupElement) {
-  popupElement.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleEscape);
-}
-
-function handleEscape(evt) {
-  if (evt.key !== 'Escape') return;
-  const popup = document.querySelector('.popup_opened');
-  if (!!popup === false) return;
-  closePopup(popup);
-}
 
 export function fillFormProfile() {
   profileFormName.value = profileName.textContent;
@@ -34,11 +16,8 @@ export function saveFormProfileValues() {
   profileDescription.textContent = profileFormDescription.value;
 }
 
-export function openCardImagePopup(cardImage, cardHeader) {
-  cardImagePopup.src = cardImage.src;
-  cardImagePopup.alt = cardImage.alt;
-  cardCaptionPopup.textContent = cardHeader.textContent;
-  openPopup(cardPopup);
+export function handleCardClick(cardImage, cardHeader) {
+  popupWithImage.open(cardImage, cardHeader);
 }
 
 
@@ -46,6 +25,6 @@ export function openCardImagePopup(cardImage, cardHeader) {
 
 export function createCard(imgSrc, header) {
   const card = new Card(imgSrc, header,
-                        cardSelectors, openCardImagePopup);
+                        cardSelectors, handleCardClick);
   return card.createCard()
 }

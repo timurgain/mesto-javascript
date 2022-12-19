@@ -1,15 +1,17 @@
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
+import PopupWithImage from './PopupWithImage.js';
 import { profilePopup, profileForm, profileEditBtn,
          placePopup, placeAddBtn, placeForm, placeFormName, placeFormLink,
-         popupSections,
          initialCards,
+         popupCardImageSelectors,
          formSelectors,
          formList } from './constants.js'
-import { openPopup, closePopup, fillFormProfile, saveFormProfileValues, createCard } from './utils.js'
+import { fillFormProfile, saveFormProfileValues, createCard } from './utils.js'
 
 
-// Create section with cards
+// 1. Create Instances
+// 1.1. cards section
 const sectionCard = new Section(
   {
     items: initialCards,
@@ -19,11 +21,14 @@ const sectionCard = new Section(
 );
 sectionCard.renderItems()
 
-// Enable forms validation
+// 1.2. forms validation
 formList.forEach((formElement) => {
   const form = new FormValidator(formSelectors, formElement);
   form.enableValidation();
 })
+
+// 1.3. popup with cards images
+export const popupWithImage = new PopupWithImage(popupCardImageSelectors)
 
 
 // Popup Listeners
@@ -34,14 +39,6 @@ profileForm.addEventListener('submit', (evt) => {
   profileForm.reset();
   evt.preventDefault();
 });
-
-popupSections.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-    if ((evt.target === popup) || (evt.target.classList.contains('popup__close-btn'))) {
-      closePopup(popup);
-    }
-  })
-})
 
 placeForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
