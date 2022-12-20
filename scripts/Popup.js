@@ -4,6 +4,17 @@ export default class Popup {
     this._handleEscCloseBound = this._handleEscClose.bind(this);
   }
 
+  _handleEscClose(evt) {
+    if (evt.key !== 'Escape' || !this._popup) return;
+    this.close()
+  }
+
+  _handleClickClose(evt) {
+    if ((evt.target === this._popup) || (evt.target.classList.contains('popup__close-btn'))) {
+      this.close();
+    }
+  }
+
   open() {
     this._popup.classList.add('popup_opened')
     const handleEscCloseBinded = this._handleEscClose.bind(this)
@@ -15,18 +26,8 @@ export default class Popup {
     document.removeEventListener('keydown', this._handleEscCloseBound)
   }
 
-  _handleEscClose(evt) {
-    if (evt.key !== 'Escape' || !this._popup) return;
-    this.close()
-  }
-
   setEventListeners() {
-
-    this._popup.addEventListener('mousedown', (evt) => {
-      if ((evt.target === this._popup) || (evt.target.classList.contains('popup__close-btn'))) {
-        this.close();
-      }
-    })
+    this._popup.addEventListener('mousedown', (evt) => this._handleClickClose(evt))
   }
 
 }

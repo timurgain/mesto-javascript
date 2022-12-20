@@ -28,7 +28,8 @@ formList.forEach((formElement) => {
 })
 
 // 1.3. popup with cards images
-export const popupWithImage = new PopupWithImage(popupCardImageSelectors)
+export const popupWithImage = new PopupWithImage(popupCardImageSelectors);
+popupWithImage.setEventListeners();
 
 
 // Popup Listeners
