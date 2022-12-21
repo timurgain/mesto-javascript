@@ -1,7 +1,7 @@
 import { profileFormName, profileFormDescription, profileName, profileDescription,
          cardSelectors } from './constants.js';
 import Card from './Card.js';
-import { popupWithImage } from './index.js';
+import { sectionCard, popupWithImage } from './index.js';
 
 
 // Popup Functions
@@ -18,6 +18,17 @@ export function saveFormProfileValues() {
 
 export function handleCardClick(cardImage, cardHeader) {
   popupWithImage.open(cardImage, cardHeader);
+}
+
+
+export function profileSubmitHandler() {
+  profileName.textContent = profileFormName.value;
+  profileDescription.textContent = profileFormDescription.value;
+}
+
+export function addPlaceSubmitHandler(placeFormNameValue, placeFormLinkValue) {
+  const item = createCard(placeFormLinkValue, placeFormNameValue);
+  sectionCard.addItem(item, 'prepend');
 }
 
 
