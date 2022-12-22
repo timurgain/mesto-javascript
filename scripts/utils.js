@@ -26,8 +26,8 @@ export function profileSubmitHandler() {
   profileDescription.textContent = profileFormDescription.value;
 }
 
-export function addPlaceSubmitHandler(placeFormNameValue, placeFormLinkValue) {
-  const item = createCard(placeFormLinkValue, placeFormNameValue);
+export function addPlaceSubmitHandler({link, name}) {
+  const item = createCard(link, name);
   sectionCard.addItem(item, 'prepend');
 }
 
