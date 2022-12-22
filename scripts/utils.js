@@ -4,22 +4,9 @@ import Card from './Card.js';
 import { sectionCard, popupWithImage } from './index.js';
 
 
-// Popup Functions
-
-export function fillFormProfile() {
-  profileFormName.value = profileName.textContent;
-  profileFormDescription.value = profileDescription.textContent;
-}
-
-export function saveFormProfileValues() {
-  profileName.textContent = profileFormName.value;
-  profileDescription.textContent = profileFormDescription.value;
-}
-
 export function handleCardClick(cardImage, cardHeader) {
   popupWithImage.open(cardImage, cardHeader);
 }
-
 
 export function profileSubmitHandler() {
   profileName.textContent = profileFormName.value;
@@ -30,9 +17,6 @@ export function addPlaceSubmitHandler({link, name}) {
   const item = createCard(link, name);
   sectionCard.addItem(item, 'prepend');
 }
-
-
-// Core functions
 
 export function createCard(imgSrc, header) {
   const card = new Card(imgSrc, header,

@@ -1,4 +1,3 @@
-export const profilePopup = document.querySelector('.profile-popup');
 export const profileForm = document.forms['profile'];
 export const profileFormName = profileForm.elements['name'];
 export const profileFormDescription = profileForm.elements['description'];
@@ -6,13 +5,7 @@ export const profileName = document.querySelector('.profile__name');
 export const profileDescription = document.querySelector('.profile__description');
 export const profileEditBtn = document.querySelector('.profile__edit-btn');
 
-export const placePopup = document.querySelector('.place-popup');
 export const placeAddBtn = document.querySelector('.profile__add-btn');
-export const placeForm = document.forms['place'];
-export const placeFormName = placeForm.elements['name'];
-export const placeFormLink = placeForm.elements['link'];
-
-// export const popupSections = document.querySelectorAll('.popup');
 
 export const initialCards = [
   {
@@ -41,11 +34,17 @@ export const initialCards = [
   }
 ];
 
+export const userSelectors = {
+  profileSelector: '.profile',
+  nameSelector: '.profile__name',
+  descriptionSelector: '.profile__description'
+};
+
 export const popupCardImageSelectors = {
   popupSelector: '.card-popup',
   cardImagePopup: '.popup__image',
   cardCaptionPopup: '.popup__caption'
-}
+};
 
 export const cardSelectors = {
   cardImageSelector: '.card__image',
@@ -53,7 +52,7 @@ export const cardSelectors = {
   cardLikeBtnSelector: '.card__like-btn',
   cardLikeBtnActive: 'card__like-btn_active',
   cardTrashBtnSelector: '.card__trash-btn'
-}
+};
 
 export const formSelectors = {
   formSelector: '.popup__form',
@@ -64,6 +63,6 @@ export const formSelectors = {
   inactiveButtonClass: 'popup__save-btn_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
-}
+};
 
 export const formList = Array.from(document.querySelectorAll(formSelectors.formSelector));

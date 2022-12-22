@@ -2,15 +2,16 @@ import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
-import { profilePopup, profileForm, profileEditBtn,
-         placePopup, placeAddBtn, placeForm, placeFormName, placeFormLink,
+import UserInfo from './UserInfo.js';
+import { profileEditBtn, placeAddBtn,
          initialCards,
-         popupCardImageSelectors,
-         formSelectors,
+         userSelectors, popupCardImageSelectors, formSelectors,
          formList } from './constants.js'
-import { fillFormProfile, saveFormProfileValues, createCard,
+import { createCard,
          profileSubmitHandler, addPlaceSubmitHandler } from './utils.js'
 
+
+// main
 
 // 1. Create Instances
 // 1.1. cards section
@@ -41,37 +42,20 @@ popupProfile.setEventListeners();
 const popupAddPlace = new PopupWithForm('.place-popup', addPlaceSubmitHandler)
 popupAddPlace.setEventListeners();
 
-// Popup Listeners
-
-// profileForm.addEventListener('submit', (evt) => {
-//   saveFormProfileValues();
-//   closePopup(profilePopup);
-//   profileForm.reset();
-//   evt.preventDefault();
-// });
-
-// placeForm.addEventListener('submit', (evt) => {
-//   evt.preventDefault();
-//   const item = createCard(placeFormLink.value, placeFormName.value);
-//   sectionCard.addItem(item, 'prepend');
-//   closePopup(placePopup);
-//   placeForm.reset();
-// })
+// 1.6. user info on page
+const userInfo = new UserInfo(userSelectors)
+userInfo.setUserInfo('Жак-Ив Кусто', 'Исследователь океана')
 
 
-
-// Open popup listeners
-
+// 2. Page buttons listeners
+// 2.1. open add new place popup
 placeAddBtn.addEventListener('click', () => {
   popupAddPlace.open();
 });
 
+// 2.2. open profile popup
 profileEditBtn.addEventListener('click', () => {
-  // отобразить попап
+  const userPage = userInfo.getUserInfo();
+  popupProfile.setInputValues(userPage);
   popupProfile.open();
-
-  // значения из профиля переносим в инпуты формы
-  // fillFormProfile();
-
 });
-
