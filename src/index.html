@@ -7,13 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Mesto: страница о путешествиях, куда можно добавлять фотографии, удалять их и ставить лайки">
   <title>Mesto: путешествия в фотогорафиях</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="page">
 
   <header class="header">
-    <img class="header__logo" src="./images/logo-mesto.svg" alt="Логотип Место Россия">
+    <img class="header__logo" src=<%=require("./images/logo-mesto.svg")%> alt="Логотип Место Россия">
+    <!-- ^ Webpack needs such an attribute entry with <% %> -->
   </header>
 
   <main class="content">
@@ -23,7 +23,7 @@
       <!-- flex, two elements -->
       <figure class="profile__figure">
         <!-- flex, two elements -->
-        <img class="profile__avatar" src="./images/kusto.jpg" alt="Изображени пользователя">
+        <img class="profile__avatar" src=<%=require("./images/kusto.jpg")%> alt="Изображени пользователя">
         <figcaption class="profile__caption">
           <!-- grid, three elements -->
           <h1 class="profile__name">Имя</h1>
@@ -120,6 +120,5 @@
     <p class="footer__paragraph">© 2022 Mesto Russia</p>
   </footer>
 
-  <script type="module" src="./scripts/index.js"></script>
 </body>
 </html>

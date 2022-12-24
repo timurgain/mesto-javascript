@@ -8,12 +8,13 @@ The project gives practice in HTML, CSS, JS and talks in pictures about beautifu
 
 ## Technologies
 
-- JavaScript and the Document Object Model (DOM);
+- JavaScript and OOP;
 - HTML5 and semantic tags;
 - CSS3 and grid layout, flexbox, adaptive, @media, @font-face;
-- Block Element Modifier methodology.
+- Block Element Modifier methodology,
+- Webpack module bundler.
 
-## Installation and launch
+## Installation and launch with npm and webpack
 
 Clone repository and navigate to folder on command line:
 ```
@@ -25,5 +26,5 @@ cd mesto
 ```
 
 ```
-open index.html
+npm run dev
 ```

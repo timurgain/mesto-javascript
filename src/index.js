@@ -1,3 +1,5 @@
+import './pages/index.css'; // webpack needs it
+
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';

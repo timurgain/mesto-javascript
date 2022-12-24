@@ -7,30 +7,38 @@ export const profileEditBtn = document.querySelector('.profile__edit-btn');
 
 export const placeAddBtn = document.querySelector('.profile__add-btn');
 
+// webpack needs urls like this
+const chuiskiyHrebet = new URL('images/chuiskiy-hrebet.jpg', import.meta.url);
+const kamchatka = new URL('images/kamchatka.jpg', import.meta.url);
+const suzdal = new URL('images/suzdal.jpg', import.meta.url);
+const olhon = new URL('images/olhon.jpg', import.meta.url);
+const teriberka = new URL('images/teriberka.jpg', import.meta.url);
+const ural = new URL('images/ural.jpg', import.meta.url);
+
 export const initialCards = [
   {
     name: 'Северный чуйский хребет',
-    link: 'images/chuiskiy-hrebet.jpg'
+    link: chuiskiyHrebet
   },
   {
     name: 'Камчатка',
-    link: 'images/kamchatka.jpg'
+    link: kamchatka
   },
   {
     name: 'Суздаль',
-    link: 'images/suzdal.jpg'
+    link: suzdal
   },
   {
     name: 'Ольхон',
-    link: 'images/olhon.jpg'
+    link: olhon
   },
   {
     name: 'Териберка',
-    link: 'images/teriberka.jpg'
+    link: teriberka
   },
   {
     name: 'Уральские горы',
-    link: 'images/ural.jpg'
+    link: ural
   }
 ];
 
