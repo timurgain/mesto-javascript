@@ -8,12 +8,12 @@ export const profileEditBtn = document.querySelector('.profile__edit-btn');
 export const placeAddBtn = document.querySelector('.profile__add-btn');
 
 // webpack needs urls like this
-const chuiskiyHrebet = new URL('images/chuiskiy-hrebet.jpg', import.meta.url);
-const kamchatka = new URL('images/kamchatka.jpg', import.meta.url);
-const suzdal = new URL('images/suzdal.jpg', import.meta.url);
-const olhon = new URL('images/olhon.jpg', import.meta.url);
-const teriberka = new URL('images/teriberka.jpg', import.meta.url);
-const ural = new URL('images/ural.jpg', import.meta.url);
+const chuiskiyHrebet = new URL('../images/chuiskiy-hrebet.jpg', import.meta.url);
+const kamchatka = new URL('../images/kamchatka.jpg', import.meta.url);
+const suzdal = new URL('../images/suzdal.jpg', import.meta.url);
+const olhon = new URL('../images/olhon.jpg', import.meta.url);
+const teriberka = new URL('../images/teriberka.jpg', import.meta.url);
+const ural = new URL('../images/ural.jpg', import.meta.url);
 
 export const initialCards = [
   {

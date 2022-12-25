@@ -16,6 +16,11 @@ The project gives practice in HTML, CSS, JS and talks in pictures about beautifu
 
 ## Installation and launch with npm and webpack
 
+Check if Node.js and npm are installed
+```
+node --version
+```
+
 Clone repository and navigate to folder on command line:
 ```
 git clone ...

@@ -1,16 +1,16 @@
-import './pages/index.css'; // webpack needs it
+import './index.css'; // webpack needs it
 
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 import { profileEditBtn, placeAddBtn,
          initialCards,
          userSelectors, popupCardImageSelectors, formSelectors,
-         formList } from './constants.js'
+         formList } from '../components/constants.js'
 import { createCard,
-         profileSubmitHandler, addPlaceSubmitHandler } from './utils.js'
+         profileSubmitHandler, addPlaceSubmitHandler } from '../components/utils.js'
 
 
 // main

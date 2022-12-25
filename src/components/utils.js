@@ -1,7 +1,7 @@
 import { profileFormName, profileFormDescription, profileName, profileDescription,
          cardSelectors } from './constants.js';
 import Card from './Card.js';
-import { sectionCard, popupWithImage } from './index.js';
+import { sectionCard, popupWithImage } from '../pages/index.js';
 
 
 export function handleCardClick(cardImage, cardHeader) {
