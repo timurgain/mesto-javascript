@@ -55,6 +55,7 @@ export const popupCardImageSelectors = {
 };
 
 export const cardSelectors = {
+  cardTemplateSelector: '#card',
   cardImageSelector: '.card__image',
   cardHeaderSelector: '.card__header',
   cardLikeBtnSelector: '.card__like-btn',

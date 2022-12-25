@@ -45,7 +45,7 @@ const popupAddPlace = new PopupWithForm('.place-popup', addPlaceSubmitHandler)
 popupAddPlace.setEventListeners();
 
 // 1.6. user info on page
-const userInfo = new UserInfo(userSelectors)
+export const userInfo = new UserInfo(userSelectors)
 userInfo.setUserInfo('Жак-Ив Кусто', 'Исследователь океана')
 
 

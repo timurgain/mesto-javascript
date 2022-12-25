@@ -1,12 +1,10 @@
 export default class Card {
-
-  static _template = document.querySelector('#card').content.children[0];
-
   constructor(imgSrc, header, cardSelectors, handleCardClick) {
     this._imgSrc = imgSrc;
     this._header = header;
     this._cardSelectors = cardSelectors;
     this._handleCardClick = handleCardClick;
+
   }
 
   createCard() {
@@ -18,7 +16,8 @@ export default class Card {
   }
 
   _getCardElement() {
-    return Card._template.cloneNode(true);
+    this._template = document.querySelector(this._cardSelectors.cardTemplateSelector).content.children[0];
+    return this._template.cloneNode(true);
   }
 
   _defineCardElements() {
@@ -34,15 +33,21 @@ export default class Card {
     this._cardHeader.textContent = this._header;
   }
 
+  _toggleLike() {
+    this._cardLikeBtn.classList.toggle(this._cardSelectors.cardLikeBtnActive)
+  }
+
+  _deleteCard() {
+    this._cardElement.remove()
+  }
+
+  _handleCardClick() {
+    this._handleCardClick(this._cardImage, this._cardHeader)
+  }
+
   _setEventListeners() {
-    this._cardLikeBtn.addEventListener(
-      'click', () => {this._cardLikeBtn.classList.toggle(this._cardSelectors.cardLikeBtnActive)}
-    );
-    this._cardTrashBtn.addEventListener(
-      'click', () => {this._cardElement.remove()}
-    );
-    this._cardImage.addEventListener(
-      'click', () => this._handleCardClick(this._cardImage, this._cardHeader)
-    );
+    this._cardLikeBtn.addEventListener('click', this._toggleLike.bind(this));
+    this._cardTrashBtn.addEventListener('click', this._deleteCard.bind(this));
+    this._cardImage.addEventListener('click', () => this._handleCardClick(this._cardImage, this._cardHeader));
   }
 }

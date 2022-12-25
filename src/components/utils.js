@@ -1,7 +1,7 @@
-import { profileFormName, profileFormDescription, profileName, profileDescription,
+import { profileFormName, profileFormDescription,
          cardSelectors } from './constants.js';
 import Card from './Card.js';
-import { sectionCard, popupWithImage } from '../pages/index.js';
+import { sectionCard, popupWithImage, userInfo } from '../pages/index.js';
 
 
 export function handleCardClick(cardImage, cardHeader) {
@@ -9,8 +9,7 @@ export function handleCardClick(cardImage, cardHeader) {
 }
 
 export function profileSubmitHandler() {
-  profileName.textContent = profileFormName.value;
-  profileDescription.textContent = profileFormDescription.value;
+  userInfo.setUserInfo(profileFormName.value, profileFormDescription.value);
 }
 
 export function addPlaceSubmitHandler({link, name}) {

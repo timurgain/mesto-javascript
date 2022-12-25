@@ -13,23 +13,10 @@ export default class FormValidator {
     this._toggleButtonState();
 
     // realtime input validation, realtime submit button state setting
-    this._fieldList.forEach((fieldElement) => {
-      fieldElement.addEventListener(
-        'input', () => {
-          this._checkInputValidity(fieldElement);
-          this._isFormValid = !this._hasInvalidInput();
-          this._toggleButtonState();
-        });
-    });
+    this._setInputListener();
 
     // final state of submit button, disabling after form reset event
-    this.formElement.addEventListener('reset', () => {
-      // setTimeout is here to start handler in the end of event
-      setTimeout(() => {
-        this._isFormValid = false;
-        this._toggleButtonState();
-      }, 0);
-    });
+    this._setResetListener();
   }
 
   _checkInputValidity(fieldElement) {
@@ -71,4 +58,26 @@ export default class FormValidator {
       this._submitButton.setAttribute('disabled', '');
     }
   }
+
+  _setInputListener() {
+    this._fieldList.forEach((fieldElement) => {
+      fieldElement.addEventListener(
+        'input', () => {
+          this._checkInputValidity(fieldElement);
+          this._isFormValid = !this._hasInvalidInput();
+          this._toggleButtonState();
+        });
+    });
+  }
+
+  _setResetListener() {
+    this.formElement.addEventListener('reset', () => {
+      // setTimeout is here to start handler in the end of event
+      setTimeout(() => {
+        this._isFormValid = false;
+        this._toggleButtonState();
+      }, 0);
+    });
+  }
+
 }
