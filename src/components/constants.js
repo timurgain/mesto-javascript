@@ -1,10 +1,4 @@
-export const profileForm = document.forms['profile'];
-export const profileFormName = profileForm.elements['name'];
-export const profileFormDescription = profileForm.elements['description'];
-export const profileName = document.querySelector('.profile__name');
-export const profileDescription = document.querySelector('.profile__description');
 export const profileEditBtn = document.querySelector('.profile__edit-btn');
-
 export const placeAddBtn = document.querySelector('.profile__add-btn');
 
 // webpack needs urls like this
