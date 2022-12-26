@@ -59,6 +59,14 @@ export default class FormValidator {
     }
   }
 
+  _resetValidation() {
+    this._fieldList.forEach((fieldElement) => {
+      const inputElement = fieldElement.querySelector(this.formSelectors.inputSelector);
+      const errorElement = fieldElement.querySelector(this.formSelectors.errorSelector);
+      this._hideInputError(inputElement, errorElement);
+    })
+  }
+
   _setInputListener() {
     this._fieldList.forEach((fieldElement) => {
       fieldElement.addEventListener(
@@ -76,6 +84,7 @@ export default class FormValidator {
       setTimeout(() => {
         this._isFormValid = false;
         this._toggleButtonState();
+        this._resetValidation();
       }, 0);
     });
   }

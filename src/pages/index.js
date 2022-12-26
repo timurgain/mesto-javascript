@@ -57,7 +57,7 @@ placeAddBtn.addEventListener('click', () => {
 
 // 2.2. open profile popup
 profileEditBtn.addEventListener('click', () => {
-  const userPage = userInfo.getUserInfo();
-  popupProfile.setInputValues(userPage);
+  const userPageInfo = userInfo.getUserInfo();
+  popupProfile.setInputValues(userPageInfo);
   popupProfile.open();
 });
