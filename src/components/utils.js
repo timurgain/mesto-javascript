@@ -21,3 +21,8 @@ export function createCard(imgSrc, header) {
                         cardSelectors, handleCardClick);
   return card.createCard()
 }
+
+export function convertResponseToJson(response) {
+  if (!response.ok) {throw new Error('HTTP status code is not OK')};
+  return response.json();
+}

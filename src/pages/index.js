@@ -5,12 +5,16 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
+
 import { profileEditBtn, placeAddBtn,
          initialCards,
          userSelectors, popupCardImageSelectors, formSelectors,
-         formList } from '../components/constants.js'
+         formList,
+         baseUrlServer, tokenServer } from '../components/constants.js'
 import { createCard,
-         profileSubmitHandler, addPlaceSubmitHandler } from '../components/utils.js'
+         profileSubmitHandler, addPlaceSubmitHandler,
+         convertResponseToJson } from '../components/utils.js'
 
 
 // main
@@ -46,7 +50,15 @@ popupAddPlace.setEventListeners();
 
 // 1.6. user info on page
 export const userInfo = new UserInfo(userSelectors)
-userInfo.setUserInfo('Жак-Ив Кусто', 'Исследователь океана')
+
+
+// 2. Api
+// 2.1. GET user profile
+const api = new Api(baseUrlServer, tokenServer);
+api.fetchUserMe()
+  .then(response => convertResponseToJson(response))
+  .then(data => userInfo.setUserInfo(data.name, data.about))
+  .catch(err => reportError(err))
 
 
 // 2. Page buttons listeners

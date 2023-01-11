@@ -1,6 +1,9 @@
 export const profileEditBtn = document.querySelector('.profile__edit-btn');
 export const placeAddBtn = document.querySelector('.profile__add-btn');
 
+export const baseUrlServer = 'https://mesto.nomoreparties.co/v1/cohort-57';
+export const tokenServer = '411b4699-7ab1-47ad-aa53-52186a7d47e6';
+
 // webpack needs urls like this
 const chuiskiyHrebet = new URL('../images/chuiskiy-hrebet.jpg', import.meta.url);
 const kamchatka = new URL('../images/kamchatka.jpg', import.meta.url);
