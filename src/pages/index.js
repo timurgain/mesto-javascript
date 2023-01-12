@@ -8,7 +8,6 @@ import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
 import { profileEditBtn, placeAddBtn,
-         initialCards,
          userSelectors, popupCardImageSelectors, formSelectors,
          formList,
          baseUrlServer, tokenServer } from '../components/constants.js'

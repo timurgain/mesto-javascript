@@ -35,4 +35,13 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards`, this._options)
   }
 
+  postCard(link, name) {
+    this._options.method = 'POST';
+    this._options.body = JSON.stringify({
+      name: name,
+      link: link
+    })
+    return fetch(`${this._baseUrl}/cards`, this._options)
+  }
+
 }

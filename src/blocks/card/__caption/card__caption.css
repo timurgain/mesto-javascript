@@ -2,9 +2,11 @@
   background-color: white;
   min-height: 79px;
   padding: 0 7.1%;
-  display: flex;
-  flex-direction: row;
-  column-gap: 7.1%;
+  display: grid;
+  grid-template-columns: 1fr 24px;
+  grid-template-rows: auto auto;
+  justify-items: center;
   align-items: center;
-  justify-content: space-between;
+  row-gap: 3px;
 }
+

@@ -19,7 +19,13 @@ export function profileSubmitHandler({name, description}) {
 
 export function addPlaceSubmitHandler({link, name}) {
   const item = createCard(link, name);
-  sectionCard.addItem(item, 'prepend');
+  api.postCard(link, name)
+    .then((response) => {
+      checkResponseOk(response);
+      sectionCard.addItem(item, 'prepend');
+    })
+    .catch(err => reportError(err));
+
 }
 
 export function createCard(imgSrc, header) {
