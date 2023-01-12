@@ -21,14 +21,10 @@ import { createCard,
 
 // 1. Create Instances
 // 1.1. cards section
-export const sectionCard = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => createCard(item.link, item.name)
-  },
-  '.elements__cards'
-);
-sectionCard.renderItems()
+export const sectionCard = new Section({
+  renderer: (item) => createCard(item.link, item.name),
+  containerSelector: '.elements__cards'
+});
 
 // 1.2. forms validation
 formList.forEach((formElement) => {
@@ -51,23 +47,31 @@ popupAddPlace.setEventListeners();
 // 1.6. user info on page
 export const userInfo = new UserInfo(userSelectors)
 
+// 1.7. api instance
+export const api = new Api(baseUrlServer, tokenServer);
 
-// 2. Api
+
+// 2. Use Api
 // 2.1. GET user profile
-const api = new Api(baseUrlServer, tokenServer);
-api.fetchUserMe()
+api.getUserMe()
   .then(response => convertResponseToJson(response))
   .then(data => userInfo.setUserInfo(data.name, data.about))
   .catch(err => reportError(err))
 
+// 2.2. GET cards, render cards
+api.getCards()
+  .then(response => convertResponseToJson(response))
+  .then((cards) => {sectionCard.addItemsArray(cards)})
+  .catch(err => reportError(err))
 
-// 2. Page buttons listeners
-// 2.1. open add new place popup
+
+// 3. Page buttons listeners
+// 3.1. open add new place popup
 placeAddBtn.addEventListener('click', () => {
   popupAddPlace.open();
 });
 
-// 2.2. open profile popup
+// 3.2. open profile popup
 profileEditBtn.addEventListener('click', () => {
   const userPageInfo = userInfo.getUserInfo();
   popupProfile.setInputValues(userPageInfo);
