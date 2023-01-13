@@ -18,7 +18,7 @@ export function profileSubmitHandler({name, description}) {
 }
 
 export function addPlaceSubmitHandler({link, name}) {
-  const item = createCard(link, name);
+  const item = createCard(link, name, '');
   api.postCard(link, name)
     .then((response) => {
       checkResponseOk(response);
@@ -28,8 +28,8 @@ export function addPlaceSubmitHandler({link, name}) {
 
 }
 
-export function createCard(imgSrc, header) {
-  const card = new Card(imgSrc, header,
+export function createCard(imgSrc, header, likeCounter) {
+  const card = new Card(imgSrc, header, likeCounter,
                         cardSelectors, handleCardClick);
   return card.createCard()
 }

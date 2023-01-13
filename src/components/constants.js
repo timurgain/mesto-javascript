@@ -57,6 +57,8 @@ export const cardSelectors = {
   cardHeaderSelector: '.card__header',
   cardLikeBtnSelector: '.card__like-btn',
   cardLikeBtnActive: 'card__like-btn_active',
+  cardLikeCounterSelector: '.card__like-counter',
+  cardLikeCounterActive: 'card__like-counter_active',
   cardTrashBtnSelector: '.card__trash-btn'
 };
 

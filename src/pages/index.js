@@ -21,7 +21,7 @@ import { createCard,
 // 1. Create Instances
 // 1.1. cards section
 export const sectionCard = new Section({
-  renderer: (item) => createCard(item.link, item.name),
+  renderer: (item) => createCard(item.link, item.name, item.likes.length),
   containerSelector: '.elements__cards'
 });
 
