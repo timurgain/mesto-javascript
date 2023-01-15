@@ -1,11 +1,13 @@
 export default class Card {
-  constructor(imgSrc, header, likeCounter, cardSelectors, handleCardClick) {
-    this._imgSrc = imgSrc;
-    this._header = header;
-    likeCounter == 0 ? this._likeCounter = '' : this._likeCounter = likeCounter;
+  constructor(item, cardSelectors, handleCardClick, handleCardTrashBtnClick) {
+    this._cardId = item._id;
+    this._ownerId = item.owner._id;
+    this._imgSrc = item.link;
+    this._header = item.name;
+    item.likes.length == 0 ? this._likeCounter = '' : this._likeCounter = item.likes.length;
     this._cardSelectors = cardSelectors;
     this._handleCardClick = handleCardClick;
-
+    this._handleCardTrashBtnClick = handleCardTrashBtnClick;
   }
 
   createCard() {
@@ -63,7 +65,8 @@ export default class Card {
 
   _setEventListeners() {
     this._cardLikeBtn.addEventListener('click', this._toggleLike.bind(this));
-    this._cardTrashBtn.addEventListener('click', this._deleteCard.bind(this));
+    // this._cardTrashBtn.addEventListener('click', this._deleteCard.bind(this));
+    this._cardTrashBtn.addEventListener('click', this._handleCardTrashBtnClick);
     this._cardImage.addEventListener('click', () => this._handleCardClick(this._cardImage, this._cardHeader));
   }
 }

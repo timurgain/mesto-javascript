@@ -4,6 +4,7 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupConfirm from '../components/PopupConfirm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
@@ -21,7 +22,7 @@ import { createCard,
 // 1. Create Instances
 // 1.1. cards section
 export const sectionCard = new Section({
-  renderer: (item) => createCard(item.link, item.name, item.likes.length),
+  renderer: (item) => createCard(item),
   containerSelector: '.elements__cards'
 });
 
@@ -36,17 +37,21 @@ export const popupWithImage = new PopupWithImage(popupCardImageSelectors);
 popupWithImage.setEventListeners();
 
 // 1.4. popup profile form
-const popupProfile = new PopupWithForm('.profile-popup', profileSubmitHandler)
+const popupProfile = new PopupWithForm('.profile-popup', profileSubmitHandler);
 popupProfile.setEventListeners();
 
 // 1.5. popup add place form
-const popupAddPlace = new PopupWithForm('.place-popup', addPlaceSubmitHandler)
+const popupAddPlace = new PopupWithForm('.place-popup', addPlaceSubmitHandler);
 popupAddPlace.setEventListeners();
 
-// 1.6. user info on page
+// 1.6. popup confirm a card deletion
+export const popupConfirm = new PopupConfirm('.confirm-popup');
+popupConfirm.setEventListeners();
+
+// 1.7. user info on page
 export const userInfo = new UserInfo(userSelectors)
 
-// 1.7. api instance
+// 1.8. api instance
 export const api = new Api(baseUrlServer, tokenServer);
 
 

@@ -1,11 +1,15 @@
 import Card from './Card.js';
 import { cardSelectors } from './constants.js';
-import { sectionCard, popupWithImage, userInfo, api } from '../pages/index.js';
+import { sectionCard, popupWithImage, popupConfirm, userInfo, api } from '../pages/index.js';
 
 
 
 export function handleCardClick(cardImage, cardHeader) {
   popupWithImage.open(cardImage, cardHeader);
+}
+
+export function handleCardTrashBtnClick() {
+  popupConfirm.open();
 }
 
 export function profileSubmitHandler({name, description}) {
@@ -18,19 +22,19 @@ export function profileSubmitHandler({name, description}) {
 }
 
 export function addPlaceSubmitHandler({link, name}) {
-  const item = createCard(link, name, '');
   api.postCard(link, name)
-    .then((response) => {
-      checkResponseOk(response);
-      sectionCard.addItem(item, 'prepend');
+    .then((response) => convertResponseToJson(response))
+    .then((item) => {
+      const card = createCard(item);
+      sectionCard.addItem(card, 'prepend');
     })
     .catch(err => reportError(err));
 
 }
 
-export function createCard(imgSrc, header, likeCounter) {
-  const card = new Card(imgSrc, header, likeCounter,
-                        cardSelectors, handleCardClick);
+export function createCard(item) {
+  const card = new Card(item,
+                        cardSelectors, handleCardClick, handleCardTrashBtnClick);
   return card.createCard()
 }
 
