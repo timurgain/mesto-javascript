@@ -1,7 +1,8 @@
 export default class Section {
-  constructor({renderer, containerSelector}) {
+  constructor({renderer, containerSelector, currentUserId}) {
     this._renderer = renderer;  // функция, создает и отрисовывает данные на странице
     this._container = document.querySelector(containerSelector);
+    this._currentUserId = currentUserId;
   }
 
   addItem(item, where='append') {

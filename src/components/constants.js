@@ -1,8 +1,9 @@
+export const baseUrlServer = 'https://mesto.nomoreparties.co/v1/cohort-57';
+export const tokenServer = '411b4699-7ab1-47ad-aa53-52186a7d47e6';
+
 export const profileEditBtn = document.querySelector('.profile__edit-btn');
 export const placeAddBtn = document.querySelector('.profile__add-btn');
 
-export const baseUrlServer = 'https://mesto.nomoreparties.co/v1/cohort-57';
-export const tokenServer = '411b4699-7ab1-47ad-aa53-52186a7d47e6';
 
 // webpack needs urls like this
 const chuiskiyHrebet = new URL('../images/chuiskiy-hrebet.jpg', import.meta.url);
@@ -59,7 +60,8 @@ export const cardSelectors = {
   cardLikeBtnActive: 'card__like-btn_active',
   cardLikeCounterSelector: '.card__like-counter',
   cardLikeCounterActive: 'card__like-counter_active',
-  cardTrashBtnSelector: '.card__trash-btn'
+  cardTrashBtnSelector: '.card__trash-btn',
+  cardTrashBtnVisible: 'card__trash-btn_visible'
 };
 
 export const formSelectors = {

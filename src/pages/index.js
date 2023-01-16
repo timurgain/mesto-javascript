@@ -59,13 +59,13 @@ export const api = new Api(baseUrlServer, tokenServer);
 // 2.1. GET user profile
 api.getUserMe()
   .then(response => convertResponseToJson(response))
-  .then(data => userInfo.setUserInfo(data.name, data.about))
+  .then(data => userInfo.setUserInfo(data.name, data.about, data._id))
   .catch(err => reportError(err))
 
 // 2.2. GET cards, render cards
 api.getCards()
   .then(response => convertResponseToJson(response))
-  .then((cards) => {sectionCard.addItemsArray(cards)})
+  .then(cards => sectionCard.addItemsArray(cards))
   .catch(err => reportError(err))
 
 

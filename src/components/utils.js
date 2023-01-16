@@ -29,12 +29,12 @@ export function addPlaceSubmitHandler({link, name}) {
       sectionCard.addItem(card, 'prepend');
     })
     .catch(err => reportError(err));
-
 }
 
 export function createCard(item) {
+  const currentUserId = userInfo.getUserInfo().id;
   const card = new Card(item,
-                        cardSelectors, handleCardClick, handleCardTrashBtnClick);
+                        currentUserId, cardSelectors, handleCardClick, handleCardTrashBtnClick);
   return card.createCard()
 }
 

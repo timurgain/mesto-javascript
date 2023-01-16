@@ -1,7 +1,8 @@
 export default class Card {
-  constructor(item, cardSelectors, handleCardClick, handleCardTrashBtnClick) {
+  constructor(item, currentUserId, cardSelectors, handleCardClick, handleCardTrashBtnClick) {
     this._cardId = item._id;
     this._ownerId = item.owner._id;
+    this._currentUserId = currentUserId;
     this._imgSrc = item.link;
     this._header = item.name;
     item.likes.length == 0 ? this._likeCounter = '' : this._likeCounter = item.likes.length;
@@ -36,6 +37,10 @@ export default class Card {
     this._cardImage.setAttribute('alt', `Изображение: ${this._header}`);
     this._cardHeader.textContent = this._header;
     this._cardLikeCounter.textContent = this._likeCounter;
+    console.log(this._currentUserId);
+    if (this._currentUserId == this._ownerId) {
+      this._cardTrashBtn.classList.add(this._cardSelectors.cardTrashBtnVisible)
+    }
   }
 
   _toggleLike() {
