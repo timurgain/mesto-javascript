@@ -44,4 +44,9 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards`, this._options)
   }
 
+  deleteCard(cardId) {
+    this._options.method = 'DELETE';
+    return fetch(`${this._baseUrl}/cards/${cardId}`, this._options);
+  }
+
 }

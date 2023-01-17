@@ -1,15 +1,10 @@
 import Card from './Card.js';
 import { cardSelectors } from './constants.js';
-import { sectionCard, popupWithImage, popupConfirm, userInfo, api } from '../pages/index.js';
-
+import { sectionCard, popupWithImage, popupCardConfirm, userInfo, api } from '../pages/index.js';
 
 
 export function handleCardClick(cardImage, cardHeader) {
   popupWithImage.open(cardImage, cardHeader);
-}
-
-export function handleCardTrashBtnClick() {
-  popupConfirm.open();
 }
 
 export function profileSubmitHandler({name, description}) {
@@ -29,6 +24,19 @@ export function addPlaceSubmitHandler({link, name}) {
       sectionCard.addItem(card, 'prepend');
     })
     .catch(err => reportError(err));
+}
+
+export function handleCardTrashBtnClick(cardId, cardElement) {
+  popupCardConfirm.open(cardId, cardElement);
+}
+
+export function deleteCardSubmitHandler(cardId, cardElement) {
+  api.deleteCard(cardId)
+    .then((response) => checkResponseOk(response))
+    .then((data) => {
+      cardElement.remove();
+      popupCardConfirm.close();
+    })
 }
 
 export function createCard(item) {

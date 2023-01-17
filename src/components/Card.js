@@ -37,7 +37,6 @@ export default class Card {
     this._cardImage.setAttribute('alt', `Изображение: ${this._header}`);
     this._cardHeader.textContent = this._header;
     this._cardLikeCounter.textContent = this._likeCounter;
-    console.log(this._currentUserId);
     if (this._currentUserId == this._ownerId) {
       this._cardTrashBtn.classList.add(this._cardSelectors.cardTrashBtnVisible)
     }
@@ -71,7 +70,7 @@ export default class Card {
   _setEventListeners() {
     this._cardLikeBtn.addEventListener('click', this._toggleLike.bind(this));
     // this._cardTrashBtn.addEventListener('click', this._deleteCard.bind(this));
-    this._cardTrashBtn.addEventListener('click', this._handleCardTrashBtnClick);
+    this._cardTrashBtn.addEventListener('click', () => this._handleCardTrashBtnClick(this._cardId, this._cardElement));
     this._cardImage.addEventListener('click', () => this._handleCardClick(this._cardImage, this._cardHeader));
   }
 }

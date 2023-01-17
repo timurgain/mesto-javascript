@@ -13,7 +13,7 @@ import { profileEditBtn, placeAddBtn,
          formList,
          baseUrlServer, tokenServer } from '../components/constants.js'
 import { createCard,
-         profileSubmitHandler, addPlaceSubmitHandler,
+         profileSubmitHandler, addPlaceSubmitHandler, deleteCardSubmitHandler,
          convertResponseToJson } from '../components/utils.js'
 
 
@@ -45,8 +45,8 @@ const popupAddPlace = new PopupWithForm('.place-popup', addPlaceSubmitHandler);
 popupAddPlace.setEventListeners();
 
 // 1.6. popup confirm a card deletion
-export const popupConfirm = new PopupConfirm('.confirm-popup');
-popupConfirm.setEventListeners();
+export const popupCardConfirm = new PopupConfirm('.confirm-popup', deleteCardSubmitHandler);
+popupCardConfirm.setEventListeners();
 
 // 1.7. user info on page
 export const userInfo = new UserInfo(userSelectors)

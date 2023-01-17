@@ -118,11 +118,13 @@
   </div>
 
   <!-- Pop-up window, confirm a card deletion -->
-  <div class="popup confirm-popup" aria-label="Окно подтверждения удаления карточки">
+  <div class="popup confirm-popup" aria-label="Окно подтверждения удаления сущности">
     <div class="popup__container popup__container_type_confirm">
       <button class="popup__close-btn" type="button"></button>
       <h2 class="popup__header popup__header_type_confirm">Вы уверены?</h2>
-      <button class="popup__save-btn" type="submit">Да</button>
+      <form class="popup__confirm-form" name="confirm" action="#" novalidate>
+        <button class="popup__save-btn" type="submit">Да</button>
+      </form>
     </div>
   </div>
 
