@@ -65,7 +65,7 @@ api.getUserMe()
 // 2.2. GET cards, render cards
 api.getCards()
   .then(response => convertResponseToJson(response))
-  .then(cards => sectionCard.addItemsArray(cards))
+  .then(cards => {sectionCard.addItemsArray(cards)})
   .catch(err => reportError(err))
 
 

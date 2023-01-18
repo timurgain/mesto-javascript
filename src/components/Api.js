@@ -1,9 +1,3 @@
-import { checkResponseOk } from './utils.js'
-
-// 'к async await стоит привыкать и начинасть использовать? например вместо fetch'
-// 'как дебажиться с настроенным вебпаком'
-// 'как хранить секреты на фронтенде'
-
 export default class Api {
   constructor(baseUrl, token) {
     this._baseUrl = baseUrl;
@@ -16,6 +10,8 @@ export default class Api {
   }
 
   // методы возвращают промисы
+
+  // User
   getUserMe() {
     this._options.method = 'GET';
     return fetch(`${this._baseUrl}/users/me`, this._options)
@@ -30,6 +26,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/users/me`, this._options)
   }
 
+  // Cards
   getCards() {
     this._options.method = 'GET';
     return fetch(`${this._baseUrl}/cards`, this._options)
@@ -47,6 +44,17 @@ export default class Api {
   deleteCard(cardId) {
     this._options.method = 'DELETE';
     return fetch(`${this._baseUrl}/cards/${cardId}`, this._options);
+  }
+
+  // Likes
+  putLike(cardId) {
+    this._options.method = 'PUT';
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, this._options);
+  }
+
+  deleteLike(cardId) {
+    this._options.method = 'DELETE';
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, this._options);
   }
 
 }

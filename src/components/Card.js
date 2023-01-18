@@ -1,14 +1,16 @@
 export default class Card {
-  constructor(item, currentUserId, cardSelectors, handleCardClick, handleCardTrashBtnClick) {
+  constructor(item, currentUserId, cardSelectors, handleCardClick, handleCardTrashBtnClick, handleCardLikeBtnClick) {
     this._cardId = item._id;
     this._ownerId = item.owner._id;
-    this._currentUserId = currentUserId;
     this._imgSrc = item.link;
     this._header = item.name;
-    item.likes.length == 0 ? this._likeCounter = '' : this._likeCounter = item.likes.length;
+    this._currentUserId = currentUserId;
     this._cardSelectors = cardSelectors;
+    item.likes.length == 0 ? this._likeCounter = '' : this._likeCounter = item.likes.length;  // если 0 тогда просто сердечко
+    this._isLiked = item.likes.some((user) => {return user._id === currentUserId});
     this._handleCardClick = handleCardClick;
     this._handleCardTrashBtnClick = handleCardTrashBtnClick;
+    this._handleCardLikeBtnClick = handleCardLikeBtnClick;
   }
 
   createCard() {
@@ -37,31 +39,22 @@ export default class Card {
     this._cardImage.setAttribute('alt', `Изображение: ${this._header}`);
     this._cardHeader.textContent = this._header;
     this._cardLikeCounter.textContent = this._likeCounter;
+    if (this._isLiked) {
+      this._cardLikeBtn.classList.toggle(this._cardSelectors.cardLikeBtnActive);
+      this._cardLikeCounter.classList.toggle(this._cardSelectors.cardLikeCounterActive);
+    }
     if (this._currentUserId == this._ownerId) {
       this._cardTrashBtn.classList.add(this._cardSelectors.cardTrashBtnVisible)
     }
   }
 
   _toggleLike() {
-    this._handleLikeCounter();
-    this._cardLikeBtn.classList.toggle(this._cardSelectors.cardLikeBtnActive);
+    this._handleCardLikeBtnClick(this._cardId, this._cardLikeBtn, this._cardLikeCounter, this._cardSelectors)
   }
 
-  _handleLikeCounter() {
-    if (this._cardLikeCounter.classList.contains(this._cardSelectors.cardLikeCounterActive)) {
-      this._likeCounter -= 1;
-      this._likeCounter == 0 ? this._likeCounter = '' : this._likeCounter = this._likeCounter;
-      this._cardLikeCounter.textContent = this._likeCounter;
-    } else {
-      this._likeCounter += 1;
-      this._cardLikeCounter.textContent = this._likeCounter;
-    }
-    this._cardLikeCounter.classList.toggle(this._cardSelectors.cardLikeCounterActive);
-  }
-
-  _deleteCard() {
-    this._cardElement.remove()
-  }
+  // _deleteCard() {
+  //   this._cardElement.remove()
+  // }
 
   _handleCardClick() {
     this._handleCardClick(this._cardImage, this._cardHeader)
@@ -69,7 +62,6 @@ export default class Card {
 
   _setEventListeners() {
     this._cardLikeBtn.addEventListener('click', this._toggleLike.bind(this));
-    // this._cardTrashBtn.addEventListener('click', this._deleteCard.bind(this));
     this._cardTrashBtn.addEventListener('click', () => this._handleCardTrashBtnClick(this._cardId, this._cardElement));
     this._cardImage.addEventListener('click', () => this._handleCardClick(this._cardImage, this._cardHeader));
   }
