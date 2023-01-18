@@ -29,6 +29,7 @@ export function deleteCardSubmitHandler(cardId, cardElement) {
       cardElement.remove();
       popupCardConfirm.close();
     })
+    .catch(err => reportError(err))
 }
 
 export function handleCardClick(cardImage, cardHeader) {
@@ -57,10 +58,12 @@ function handleCardLikeBtnClick(cardId, cardLikeBtnElement, cardLikeCounterEleme
       api.deleteLike(cardId)
         .then((response) => convertResponseToJson(response))
         .then((updatedCard) => updateCardLikes(updatedCard, paramsObj))
+        .catch(err => reportError(err))
     } else if (cachedCard._id === cardId) {
       api.putLike(cardId)
         .then((response) => convertResponseToJson(response))
         .then((updatedCard) => updateCardLikes(updatedCard, paramsObj))
+        .catch(err => reportError(err))
     }
   })
 }
