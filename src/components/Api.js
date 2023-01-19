@@ -26,6 +26,14 @@ export default class Api {
     return fetch(`${this._baseUrl}/users/me`, this._options)
   }
 
+  patchUserMeAvatar(url) {
+    this._options.method = 'PATCH';
+    this._options.body = JSON.stringify({
+      avatar: url
+    })
+    return fetch(`${this._baseUrl}/users/me/avatar`, this._options)
+  }
+
   // Cards
   getCards() {
     this._options.method = 'GET';
