@@ -56,7 +56,7 @@
     </section>
   </main>
 
-  <!-- Pop-up window, edit a profile -->
+  <!-- Pop-up window, edit a profile name and description -->
   <div class="popup profile-popup" aria-label="Окно редактирования профиля">
     <div class="popup__container">
       <button class="popup__close-btn" type="button"></button>
@@ -73,6 +73,25 @@
         <label class="popup__field">
           <input class="popup__input" name="description" type="text"
             required minlength="2" maxlength="200">
+          <span class="popup__error"></span>
+        </label>
+
+        <button class="popup__save-btn" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Pop-up window, edit a profile avatar -->
+  <div class="popup avatar-popup" aria-label="Окно редактирования аватара">
+    <div class="popup__container popup__container_type_avatar">
+      <button class="popup__close-btn" type="button"></button>
+      <h2 class="popup__header popup__header_type_avatar">Обновить аватар</h2>
+
+      <form class="popup__form" name="avatar" action="#" novalidate>
+
+        <label class="popup__field">
+          <input class="popup__input" name="link" type="url" placeholder="Ссылка на картинку"
+            required>
           <span class="popup__error"></span>
         </label>
 

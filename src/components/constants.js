@@ -3,6 +3,7 @@ export const tokenServer = '411b4699-7ab1-47ad-aa53-52186a7d47e6';
 
 export const profileEditBtn = document.querySelector('.profile__edit-btn');
 export const placeAddBtn = document.querySelector('.profile__add-btn');
+export const profileAvatar = document.querySelector('.profile__avatar');
 
 
 // webpack needs urls like this

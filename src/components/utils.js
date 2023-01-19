@@ -32,6 +32,21 @@ export function deleteCardSubmitHandler(cardId, cardElement) {
     .catch(err => reportError(err))
 }
 
+export function editAvatarSubmitHandler(url) {
+  console.log('типа editAvatarSubmitHandler')
+
+  // заменить текст кнопки на Сохранение...
+
+  api.patchUserMeAvatar(url)
+    .then((response) => {convertResponseToJson(response)})
+    .then((data) => {
+      // подставить новый url в разметку страницы
+      // вернуть прежний текст кнопки
+      // закрыть попап
+    })
+    .catch(err => reportError(err))
+}
+
 export function handleCardClick(cardImage, cardHeader) {
   popupWithImage.open(cardImage, cardHeader);
 }
@@ -76,7 +91,7 @@ export function createCard(item) {
   return card.createCard()
 }
 
-// near api
+// about api
 
 export function checkResponseOk(response) {
   if (!response.ok) {throw new Error('HTTP status code is not OK')};
