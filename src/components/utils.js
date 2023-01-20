@@ -10,7 +10,7 @@ import { sectionCard, userInfo, api,
 export function profileSubmitHandler({name, description}) {
   api.patchUserMe(name, description)
     .then((response) => {
-      checkResponseOk(response);
+      api.checkResponseOk(response);
       userInfo.setUserInfo(name, description);
     })
     .catch(err => reportError(err))
@@ -19,7 +19,7 @@ export function profileSubmitHandler({name, description}) {
 
 export function addPlaceSubmitHandler({link, name}) {
   api.postCard(link, name)
-    .then((response) => convertResponseToJson(response))
+    .then((response) => api.convertResponseToJson(response))
     .then((item) => {
       const card = createCard(item);
       sectionCard.addItem(card, item, 'prepend');
@@ -30,7 +30,7 @@ export function addPlaceSubmitHandler({link, name}) {
 
 export function editAvatarSubmitHandler({ link }) {
   api.patchUserMeAvatar(link)
-    .then((response) => convertResponseToJson(response))
+    .then((response) => api.convertResponseToJson(response))
     .then((data) => userInfo.setUserAvatar(data.avatar))
     .catch(err => reportError(err))
     .finally(() => {popupEditAvatar.close()})
@@ -38,7 +38,7 @@ export function editAvatarSubmitHandler({ link }) {
 
 export function deleteCardSubmitHandler(cardId, cardElement) {
   api.deleteCard(cardId)
-    .then((response) => checkResponseOk(response))
+    .then((response) => api.checkResponseOk(response))
     .then((data) => {
       cardElement.remove();
       popupCardConfirm.close();
@@ -63,12 +63,12 @@ function handleCardLikeBtnClick(cardId, cardLikeBtnElement, cardLikeCounterEleme
 
     if (cachedCard._id === cardId && cachedCard.likes.some((user) => {return user._id === currentUserId})) {
       api.deleteLike(cardId)
-        .then((response) => convertResponseToJson(response))
+        .then((response) => api.convertResponseToJson(response))
         .then((updatedCard) => updateCardLikes(updatedCard, paramsObj))
         .catch(err => reportError(err))
     } else if (cachedCard._id === cardId) {
       api.putLike(cardId)
-        .then((response) => convertResponseToJson(response))
+        .then((response) => api.convertResponseToJson(response))
         .then((updatedCard) => updateCardLikes(updatedCard, paramsObj))
         .catch(err => reportError(err))
     }
@@ -92,15 +92,4 @@ export function createCard(item) {
                         currentUserId, cardSelectors,
                         handleCardClick, handleCardTrashBtnClick, handleCardLikeBtnClick);
   return card.createCard()
-}
-
-// about api
-
-export function checkResponseOk(response) {
-  if (!response.ok) {throw new Error('HTTP status code is not OK')};
-}
-
-export function convertResponseToJson(response) {
-  checkResponseOk(response);
-  return response.json();
 }

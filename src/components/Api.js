@@ -66,13 +66,13 @@ export default class Api {
   }
 
   // other
-  // checkResponseOk(response) {
-  //   if (!response.ok) {throw new Error('HTTP status code is not OK')};
-  // }
+  checkResponseOk(response) {
+    if (!response.ok) {throw new Error('HTTP status code is not OK')};
+  }
 
-  // convertResponseToJson(response) {
-  //   this.checkResponseOk(response);
-  //   return response.json();
-  // }
+  convertResponseToJson(response) {
+    this.checkResponseOk(response);
+    return response.json();
+  }
 
 }

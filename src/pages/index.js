@@ -14,8 +14,7 @@ import { profileEditBtn, placeAddBtn, profileAvatar,
          baseUrlServer, tokenServer } from '../components/constants.js'
 import { createCard,
          profileSubmitHandler, addPlaceSubmitHandler,
-         deleteCardSubmitHandler, editAvatarSubmitHandler,
-         convertResponseToJson } from '../components/utils.js'
+         deleteCardSubmitHandler, editAvatarSubmitHandler } from '../components/utils.js'
 
 
 // main
@@ -65,7 +64,7 @@ export const api = new Api(baseUrlServer, tokenServer);
 
 // 2.1. GET user profile
 api.getUserMe()
-  .then(response => convertResponseToJson(response))
+  .then(response => api.convertResponseToJson(response))
   .then((data) => {
     userInfo.setUserInfo(data.name, data.about, data._id);
     userInfo.setUserAvatar(data.avatar);
@@ -74,7 +73,7 @@ api.getUserMe()
 
 // 2.2. GET cards, render cards
 api.getCards()
-  .then(response => convertResponseToJson(response))
+  .then(response => api.convertResponseToJson(response))
   .then(cards => {sectionCard.addItemsArray(cards)})
   .catch(err => reportError(err))
 
