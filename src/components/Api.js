@@ -65,4 +65,14 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, this._options);
   }
 
+  // other
+  // checkResponseOk(response) {
+  //   if (!response.ok) {throw new Error('HTTP status code is not OK')};
+  // }
+
+  // convertResponseToJson(response) {
+  //   this.checkResponseOk(response);
+  //   return response.json();
+  // }
+
 }

@@ -39,15 +39,15 @@ export const popupWithImage = new PopupWithImage(popupCardImageSelectors);
 popupWithImage.setEventListeners();
 
 // 1.4. popup profile form
-const popupProfile = new PopupWithForm('.profile-popup', profileSubmitHandler);
+export const popupProfile = new PopupWithForm('.profile-popup', profileSubmitHandler);
 popupProfile.setEventListeners();
 
 // 1.5. popup add a place form
-const popupAddPlace = new PopupWithForm('.place-popup', addPlaceSubmitHandler);
+export const popupAddPlace = new PopupWithForm('.place-popup', addPlaceSubmitHandler);
 popupAddPlace.setEventListeners();
 
 // 1.6. popup edit a profile avatar
-const popupEditAvatar = new PopupWithForm('.avatar-popup', editAvatarSubmitHandler);
+export const popupEditAvatar = new PopupWithForm('.avatar-popup', editAvatarSubmitHandler);
 popupEditAvatar.setEventListeners();
 
 // 1.7. popup confirm a card deletion
@@ -66,7 +66,10 @@ export const api = new Api(baseUrlServer, tokenServer);
 // 2.1. GET user profile
 api.getUserMe()
   .then(response => convertResponseToJson(response))
-  .then(data => userInfo.setUserInfo(data.name, data.about, data._id))
+  .then((data) => {
+    userInfo.setUserInfo(data.name, data.about, data._id);
+    userInfo.setUserAvatar(data.avatar);
+  })
   .catch(err => reportError(err))
 
 // 2.2. GET cards, render cards

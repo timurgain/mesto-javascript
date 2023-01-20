@@ -1,7 +1,11 @@
 import Card from './Card.js';
 import { cardSelectors } from './constants.js';
-import { sectionCard, popupWithImage, popupCardConfirm, userInfo, api } from '../pages/index.js';
+import { sectionCard, userInfo, api,
+         popupWithImage, popupCardConfirm,
+         popupAddPlace, popupEditAvatar, popupProfile } from '../pages/index.js';
 
+
+// Submit Handlers
 
 export function profileSubmitHandler({name, description}) {
   api.patchUserMe(name, description)
@@ -9,7 +13,8 @@ export function profileSubmitHandler({name, description}) {
       checkResponseOk(response);
       userInfo.setUserInfo(name, description);
     })
-    .catch(err => reportError(err));
+    .catch(err => reportError(err))
+    .finally(() => {popupProfile.close()})
 }
 
 export function addPlaceSubmitHandler({link, name}) {
@@ -19,7 +24,16 @@ export function addPlaceSubmitHandler({link, name}) {
       const card = createCard(item);
       sectionCard.addItem(card, item, 'prepend');
     })
-    .catch(err => reportError(err));
+    .catch(err => reportError(err))
+    .finally(() => {popupAddPlace.close()})
+}
+
+export function editAvatarSubmitHandler({ link }) {
+  api.patchUserMeAvatar(link)
+    .then((response) => convertResponseToJson(response))
+    .then((data) => userInfo.setUserAvatar(data.avatar))
+    .catch(err => reportError(err))
+    .finally(() => {popupEditAvatar.close()})
 }
 
 export function deleteCardSubmitHandler(cardId, cardElement) {
@@ -32,20 +46,7 @@ export function deleteCardSubmitHandler(cardId, cardElement) {
     .catch(err => reportError(err))
 }
 
-export function editAvatarSubmitHandler(url) {
-  console.log('типа editAvatarSubmitHandler')
-
-  // заменить текст кнопки на Сохранение...
-
-  api.patchUserMeAvatar(url)
-    .then((response) => {convertResponseToJson(response)})
-    .then((data) => {
-      // подставить новый url в разметку страницы
-      // вернуть прежний текст кнопки
-      // закрыть попап
-    })
-    .catch(err => reportError(err))
-}
+// Click Handlers
 
 export function handleCardClick(cardImage, cardHeader) {
   popupWithImage.open(cardImage, cardHeader);
@@ -53,15 +54,6 @@ export function handleCardClick(cardImage, cardHeader) {
 
 export function handleCardTrashBtnClick(cardId, cardElement) {
   popupCardConfirm.open(cardId, cardElement);
-}
-
-function updateCardLikes(updatedCard, {cachedCard, cardLikeBtnElement, cardLikeCounterElement, cardSelectors}) {
-  cachedCard.likes = updatedCard.likes;
-  updatedCard.likes.length == 0
-    ? cardLikeCounterElement.textContent = ''
-    : cardLikeCounterElement.textContent = updatedCard.likes.length;
-  cardLikeBtnElement.classList.toggle(cardSelectors.cardLikeBtnActive);
-  cardLikeCounterElement.classList.toggle(cardSelectors.cardLikeCounterActive);
 }
 
 function handleCardLikeBtnClick(cardId, cardLikeBtnElement, cardLikeCounterElement, cardSelectors) {
@@ -81,6 +73,17 @@ function handleCardLikeBtnClick(cardId, cardLikeBtnElement, cardLikeCounterEleme
         .catch(err => reportError(err))
     }
   })
+}
+
+// other
+
+function updateCardLikes(updatedCard, {cachedCard, cardLikeBtnElement, cardLikeCounterElement, cardSelectors}) {
+  cachedCard.likes = updatedCard.likes;
+  updatedCard.likes.length == 0
+    ? cardLikeCounterElement.textContent = ''  // display only a heart, without a zero
+    : cardLikeCounterElement.textContent = updatedCard.likes.length;
+  cardLikeBtnElement.classList.toggle(cardSelectors.cardLikeBtnActive);
+  cardLikeCounterElement.classList.toggle(cardSelectors.cardLikeCounterActive);
 }
 
 export function createCard(item) {

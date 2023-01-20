@@ -44,7 +44,8 @@ export const initialCards = [
 export const userSelectors = {
   profileSelector: '.profile',
   nameSelector: '.profile__name',
-  descriptionSelector: '.profile__description'
+  descriptionSelector: '.profile__description',
+  avatarSelector: '.profile__avatar'
 };
 
 export const popupCardImageSelectors = {
