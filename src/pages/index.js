@@ -62,11 +62,7 @@ export const api = new Api(baseUrlServer, tokenServer);
 
 // 2. Use Api
 
-// These promises will run in Promise.all
-const getUserPromise = api.getUserMe().then(response => api.convertResponseToJson(response))
-const getCardsPromise = api.getCards().then(response => api.convertResponseToJson(response))
-
-Promise.all([getUserPromise, getCardsPromise])
+Promise.all([api.getUserMe(), api.getCards()])
   .then(([dataUser, dataCards]) => {
     userInfo.setUserInfo(dataUser.name, dataUser.about, dataUser._id);
     userInfo.setUserAvatar(dataUser.avatar);

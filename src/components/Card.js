@@ -43,7 +43,7 @@ export default class Card {
       this._cardLikeBtn.classList.toggle(this._cardSelectors.cardLikeBtnActive);
       this._cardLikeCounter.classList.toggle(this._cardSelectors.cardLikeCounterActive);
     }
-    if (this._currentUserId == this._ownerId) {
+    if (this._currentUserId === this._ownerId) {
       this._cardTrashBtn.classList.add(this._cardSelectors.cardTrashBtnVisible)
     }
   }

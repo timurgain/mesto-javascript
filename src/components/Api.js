@@ -9,12 +9,12 @@ export default class Api {
     }
   }
 
-  // методы возвращают промисы
-
   // User
   getUserMe() {
     this._options.method = 'GET';
     return fetch(`${this._baseUrl}/users/me`, this._options)
+            .then(response => this._convertResponseToJson(response))
+            .catch(err => reportError(err))
   }
 
   patchUserMe(name, about) {
@@ -24,6 +24,8 @@ export default class Api {
       about: about
     })
     return fetch(`${this._baseUrl}/users/me`, this._options)
+            .then(response => this._convertResponseToJson(response))
+            .catch(err => reportError(err))
   }
 
   patchUserMeAvatar(url) {
@@ -32,12 +34,16 @@ export default class Api {
       avatar: url
     })
     return fetch(`${this._baseUrl}/users/me/avatar`, this._options)
+            .then(response => this._convertResponseToJson(response))
+            .catch(err => reportError(err))
   }
 
   // Cards
   getCards() {
     this._options.method = 'GET';
     return fetch(`${this._baseUrl}/cards`, this._options)
+            .then(response => this._convertResponseToJson(response))
+            .catch(err => reportError(err))
   }
 
   postCard(link, name) {
@@ -47,31 +53,39 @@ export default class Api {
       link: link
     })
     return fetch(`${this._baseUrl}/cards`, this._options)
+            .then(response => this._convertResponseToJson(response))
+            .catch(err => reportError(err))
   }
 
   deleteCard(cardId) {
     this._options.method = 'DELETE';
-    return fetch(`${this._baseUrl}/cards/${cardId}`, this._options);
+    return fetch(`${this._baseUrl}/cards/${cardId}`, this._options)
+            .then(response => this._convertResponseToJson(response))
+            .catch(err => reportError(err))
   }
 
   // Likes
   putLike(cardId) {
     this._options.method = 'PUT';
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, this._options);
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, this._options)
+            .then(response => this._convertResponseToJson(response))
+            .catch(err => reportError(err))
   }
 
   deleteLike(cardId) {
     this._options.method = 'DELETE';
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, this._options);
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, this._options)
+            .then(response => this._convertResponseToJson(response))
+            .catch(err => reportError(err))
   }
 
   // other
-  checkResponseOk(response) {
+  _checkResponseOk(response) {
     if (!response.ok) {throw new Error('HTTP status code is not OK')};
   }
 
-  convertResponseToJson(response) {
-    this.checkResponseOk(response);
+  _convertResponseToJson(response) {
+    this._checkResponseOk(response);
     return response.json();
   }
 
