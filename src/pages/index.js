@@ -10,7 +10,7 @@ import Api from '../components/Api.js';
 
 import { profileEditBtn, placeAddBtn, profileAvatar,
          userSelectors, popupCardImageSelectors, formSelectors,
-         formList,
+         formList, saveBtnText,
          baseUrlServer, tokenServer } from '../components/constants.js'
 import { createCard,
          profileSubmitHandler, addPlaceSubmitHandler,
@@ -38,15 +38,15 @@ export const popupWithImage = new PopupWithImage(popupCardImageSelectors);
 popupWithImage.setEventListeners();
 
 // 1.4. popup profile form
-export const popupProfile = new PopupWithForm('.profile-popup', profileSubmitHandler);
+export const popupProfile = new PopupWithForm('.profile-popup', saveBtnText, profileSubmitHandler);
 popupProfile.setEventListeners();
 
 // 1.5. popup add a place form
-export const popupAddPlace = new PopupWithForm('.place-popup', addPlaceSubmitHandler);
+export const popupAddPlace = new PopupWithForm('.place-popup', saveBtnText, addPlaceSubmitHandler);
 popupAddPlace.setEventListeners();
 
 // 1.6. popup edit a profile avatar
-export const popupEditAvatar = new PopupWithForm('.avatar-popup', editAvatarSubmitHandler);
+export const popupEditAvatar = new PopupWithForm('.avatar-popup', saveBtnText, editAvatarSubmitHandler);
 popupEditAvatar.setEventListeners();
 
 // 1.7. popup confirm a card deletion
