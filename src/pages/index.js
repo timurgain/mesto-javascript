@@ -62,19 +62,16 @@ export const api = new Api(baseUrlServer, tokenServer);
 
 // 2. Use Api
 
-// 2.1. GET user profile
-api.getUserMe()
-  .then(response => api.convertResponseToJson(response))
-  .then((data) => {
-    userInfo.setUserInfo(data.name, data.about, data._id);
-    userInfo.setUserAvatar(data.avatar);
-  })
-  .catch(err => reportError(err))
+// These promises will run in Promise.all
+const getUserPromise = api.getUserMe().then(response => api.convertResponseToJson(response))
+const getCardsPromise = api.getCards().then(response => api.convertResponseToJson(response))
 
-// 2.2. GET cards, render cards
-api.getCards()
-  .then(response => api.convertResponseToJson(response))
-  .then(cards => {sectionCard.addItemsArray(cards)})
+Promise.all([getUserPromise, getCardsPromise])
+  .then(([dataUser, dataCards]) => {
+    userInfo.setUserInfo(dataUser.name, dataUser.about, dataUser._id);
+    userInfo.setUserAvatar(dataUser.avatar);
+    sectionCard.addItemsArray(dataCards)
+  })
   .catch(err => reportError(err))
 
 

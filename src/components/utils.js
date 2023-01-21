@@ -87,7 +87,7 @@ function updateCardLikes(updatedCard, {cachedCard, cardLikeBtnElement, cardLikeC
 }
 
 export function createCard(item) {
-  const currentUserId = userInfo.getUserInfo().id;  // async user creation in index.js
+  const currentUserId = userInfo.getUserInfo().id;
   const card = new Card(item,
                         currentUserId, cardSelectors,
                         handleCardClick, handleCardTrashBtnClick, handleCardLikeBtnClick);
