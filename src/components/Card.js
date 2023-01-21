@@ -13,12 +13,32 @@ export default class Card {
     this._handleCardLikeBtnClick = handleCardLikeBtnClick;
   }
 
-  createCard() {
+  create() {
     this._cardElement = this._getCardElement();
     this._defineCardElements();
     this._fillCardElement();
     this._setEventListeners();
     return this._cardElement
+  }
+
+  toggleLike(updatedCardData) {
+    this._isLiked = !this._isLiked;
+    updatedCardData.likes.length == 0
+      ? this._cardLikeCounter.textContent = ''
+      : this._cardLikeCounter.textContent = updatedCardData.likes.length;
+      this._cardLikeBtn.classList.toggle(this._cardSelectors.cardLikeBtnActive);
+      this._cardLikeCounter.classList.toggle(this._cardSelectors.cardLikeCounterActive);
+  }
+
+  getAttributes() {
+    return {
+      isLiked: this._isLiked,
+      cardId: this._cardId
+    }
+  }
+
+  delete() {
+    this._cardElement.remove()
   }
 
   _getCardElement() {
@@ -48,21 +68,13 @@ export default class Card {
     }
   }
 
-  _toggleLike() {
-    this._handleCardLikeBtnClick(this._cardId, this._cardLikeBtn, this._cardLikeCounter, this._cardSelectors)
-  }
-
-  // _deleteCard() {
-  //   this._cardElement.remove()
-  // }
-
   _handleCardClick() {
     this._handleCardClick(this._cardImage, this._cardHeader)
   }
 
   _setEventListeners() {
-    this._cardLikeBtn.addEventListener('click', this._toggleLike.bind(this));
-    this._cardTrashBtn.addEventListener('click', () => this._handleCardTrashBtnClick(this._cardId, this._cardElement));
+    this._cardLikeBtn.addEventListener('click', () => this._handleCardLikeBtnClick(this));
+    this._cardTrashBtn.addEventListener('click', () => this._handleCardTrashBtnClick(this));
     this._cardImage.addEventListener('click', () => this._handleCardClick(this._cardImage, this._cardHeader));
   }
 }

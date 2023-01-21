@@ -11,9 +11,8 @@ export default class PopupConfirm extends Popup {
   }
 
   // entity - who call the popup (e.g. card instance)
-  open(entityId, entityElement) {
-    this._confirmEntityId = entityId;
-    this._confirmEntityElement = entityElement;
+  open(entityInstance) {
+    this._entityInstance = entityInstance;
     super.open();
   }
 
@@ -27,7 +26,7 @@ export default class PopupConfirm extends Popup {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._formSubmitHandler(this._confirmEntityId, this._confirmEntityElement);
+      this._formSubmitHandler(this._entityInstance);
     });
   }
 

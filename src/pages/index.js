@@ -13,8 +13,8 @@ import { profileEditBtn, placeAddBtn, profileAvatar,
          formList, saveBtnText,
          baseUrlServer, tokenServer } from '../components/constants.js'
 import { createCard,
-         profileSubmitHandler, addPlaceSubmitHandler,
-         deleteCardSubmitHandler, editAvatarSubmitHandler } from '../components/utils.js'
+         handleProfileSubmit, handlePlaceSubmit,
+         handleCardDeletionSubmit, handleAvatarSubmit } from '../components/utils.js'
 
 
 // main
@@ -38,19 +38,19 @@ export const popupWithImage = new PopupWithImage(popupCardImageSelectors);
 popupWithImage.setEventListeners();
 
 // 1.4. popup profile form
-export const popupProfile = new PopupWithForm('.profile-popup', saveBtnText, profileSubmitHandler);
+export const popupProfile = new PopupWithForm('.profile-popup', saveBtnText, handleProfileSubmit);
 popupProfile.setEventListeners();
 
 // 1.5. popup add a place form
-export const popupAddPlace = new PopupWithForm('.place-popup', saveBtnText, addPlaceSubmitHandler);
+export const popupAddPlace = new PopupWithForm('.place-popup', saveBtnText, handlePlaceSubmit);
 popupAddPlace.setEventListeners();
 
 // 1.6. popup edit a profile avatar
-export const popupEditAvatar = new PopupWithForm('.avatar-popup', saveBtnText, editAvatarSubmitHandler);
+export const popupEditAvatar = new PopupWithForm('.avatar-popup', saveBtnText, handleAvatarSubmit);
 popupEditAvatar.setEventListeners();
 
 // 1.7. popup confirm a card deletion
-export const popupCardConfirm = new PopupConfirm('.confirm-popup', deleteCardSubmitHandler);
+export const popupCardConfirm = new PopupConfirm('.confirm-popup', handleCardDeletionSubmit);
 popupCardConfirm.setEventListeners();
 
 // 1.8. user info on page
@@ -60,7 +60,7 @@ export const userInfo = new UserInfo(userSelectors)
 export const api = new Api(baseUrlServer, tokenServer);
 
 
-// 2. Use Api
+// 2. Use Api, get current user and get cards
 
 Promise.all([api.getUserMe(), api.getCards()])
   .then(([dataUser, dataCards]) => {

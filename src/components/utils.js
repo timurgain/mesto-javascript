@@ -7,9 +7,9 @@ import { sectionCard, userInfo, api,
 
 // Submit Handlers
 
-export function profileSubmitHandler({ name, description }, saveBtnElement, saveBtnTextInitial) {
+export function handleProfileSubmit({ name, description }, saveBtnElement, saveBtnTextInitial) {
   api.patchUserMe(name, description)
-    .then(() => userInfo.setUserInfo(name, description))
+    .then((data) => userInfo.setUserInfo(data.name, data.about))
     .catch(err => reportError(err))
     .finally(() => {
       saveBtnElement.textContent = saveBtnTextInitial;
@@ -17,33 +17,34 @@ export function profileSubmitHandler({ name, description }, saveBtnElement, save
     })
 }
 
-export function addPlaceSubmitHandler({ link, name }, saveBtnElement, saveBtnTextInitial) {
+export function handlePlaceSubmit({ link, name }, saveBtnElement, saveBtnTextInitial) {
   api.postCard(link, name)
     .then((item) => {
       const card = createCard(item);
-      sectionCard.addItem(card, item, 'prepend');
+      sectionCard.addItem(card, 'prepend');
     })
     .catch(err => reportError(err))
     .finally(() => {
       saveBtnElement.textContent = saveBtnTextInitial;
-      popupProfile.close()
+      popupAddPlace.close()
     })
 }
 
-export function editAvatarSubmitHandler({ link }, saveBtnElement, saveBtnTextInitial) {
+export function handleAvatarSubmit({ link }, saveBtnElement, saveBtnTextInitial) {
   api.patchUserMeAvatar(link)
     .then((data) => userInfo.setUserAvatar(data.avatar))
     .catch(err => reportError(err))
     .finally(() => {
       saveBtnElement.textContent = saveBtnTextInitial;
-      popupProfile.close()
+      popupEditAvatar.close()
     })
 }
 
-export function deleteCardSubmitHandler(cardId, cardElement) {
-  api.deleteCard(cardId)
+export function handleCardDeletionSubmit(cardInstance) {
+  const attrs = cardInstance.getAttributes();
+  api.deleteCard(attrs.cardId)
     .then(() => {
-      cardElement.remove();
+      cardInstance.delete();
       popupCardConfirm.close();
     })
     .catch(err => reportError(err))
@@ -55,36 +56,21 @@ export function handleCardClick(cardImage, cardHeader) {
   popupWithImage.open(cardImage, cardHeader);
 }
 
-export function handleCardTrashBtnClick(cardId, cardElement) {
-  popupCardConfirm.open(cardId, cardElement);
+export function handleCardTrashBtnClick(cardInstance) {
+  popupCardConfirm.open(cardInstance);
 }
 
-function handleCardLikeBtnClick(cardId, cardLikeBtnElement, cardLikeCounterElement, cardSelectors) {
-  const currentUserId = userInfo.getUserInfo().id;
-  sectionCard.cacheServerData.forEach((cachedCard) => {
-    const paramsObj = {cachedCard, cardLikeBtnElement, cardLikeCounterElement, cardSelectors}
-
-    if (cachedCard._id === cardId && cachedCard.likes.some((user) => {return user._id === currentUserId})) {
-      api.deleteLike(cardId)
-        .then((updatedCard) => updateCardLikes(updatedCard, paramsObj))
-        .catch(err => reportError(err))
-    } else if (cachedCard._id === cardId) {
-      api.putLike(cardId)
-        .then((updatedCard) => updateCardLikes(updatedCard, paramsObj))
-        .catch(err => reportError(err))
-    }
-  })
-}
-
-// other
-
-function updateCardLikes(updatedCard, {cachedCard, cardLikeBtnElement, cardLikeCounterElement, cardSelectors}) {
-  cachedCard.likes = updatedCard.likes;
-  updatedCard.likes.length == 0
-    ? cardLikeCounterElement.textContent = ''  // display only a heart, without a zero
-    : cardLikeCounterElement.textContent = updatedCard.likes.length;
-  cardLikeBtnElement.classList.toggle(cardSelectors.cardLikeBtnActive);
-  cardLikeCounterElement.classList.toggle(cardSelectors.cardLikeCounterActive);
+function handleCardLikeBtnClick(cardInstance) {
+  const attrs = cardInstance.getAttributes();
+  if (attrs.isLiked) {
+    api.deleteLike(attrs.cardId)
+      .then((updatedCardData) => cardInstance.toggleLike(updatedCardData))
+      .catch(err => reportError(err))
+  } else {
+    api.putLike(attrs.cardId)
+      .then((updatedCardData) => cardInstance.toggleLike(updatedCardData))
+      .catch(err => reportError(err))
+  }
 }
 
 export function createCard(item) {
@@ -92,5 +78,5 @@ export function createCard(item) {
   const card = new Card(item,
                         currentUserId, cardSelectors,
                         handleCardClick, handleCardTrashBtnClick, handleCardLikeBtnClick);
-  return card.createCard()
+  return card.create()
 }
