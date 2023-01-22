@@ -7,37 +7,35 @@ import { sectionCard, userInfo, api,
 
 // Submit Handlers
 
-export function handleProfileSubmit({ name, description }, saveBtnElement, saveBtnTextInitial) {
+export function handleProfileSubmit({ name, description }) {
   api.patchUserMe(name, description)
-    .then((data) => userInfo.setUserInfo(data.name, data.about))
-    .catch(err => reportError(err))
-    .finally(() => {
-      saveBtnElement.textContent = saveBtnTextInitial;
-      popupProfile.close()
+    .then((data) => {
+      userInfo.setUserInfo(data.name, data.about);
+      popupProfile.close();
     })
+    .catch(err => reportError(err))
+    .finally(() => popupProfile.setSaveBtnText('initial'))
 }
 
-export function handlePlaceSubmit({ link, name }, saveBtnElement, saveBtnTextInitial) {
+export function handlePlaceSubmit({ link, name }) {
   api.postCard(link, name)
     .then((item) => {
       const card = createCard(item);
       sectionCard.addItem(card, 'prepend');
+      popupAddPlace.close();
     })
     .catch(err => reportError(err))
-    .finally(() => {
-      saveBtnElement.textContent = saveBtnTextInitial;
-      popupAddPlace.close()
-    })
+    .finally(() => popupAddPlace.setSaveBtnText('initial'))
 }
 
-export function handleAvatarSubmit({ link }, saveBtnElement, saveBtnTextInitial) {
+export function handleAvatarSubmit({ link }) {
   api.patchUserMeAvatar(link)
-    .then((data) => userInfo.setUserAvatar(data.avatar))
-    .catch(err => reportError(err))
-    .finally(() => {
-      saveBtnElement.textContent = saveBtnTextInitial;
-      popupEditAvatar.close()
+    .then((data) => {
+      userInfo.setUserAvatar(data.avatar);
+      popupEditAvatar.close();
     })
+    .catch(err => reportError(err))
+    .finally(() => popupEditAvatar.setSaveBtnText('initial'))
 }
 
 export function handleCardDeletionSubmit(cardInstance) {

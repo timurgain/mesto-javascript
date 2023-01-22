@@ -5,7 +5,6 @@ export const profileEditBtn = document.querySelector('.profile__edit-btn');
 export const placeAddBtn = document.querySelector('.profile__add-btn');
 export const profileAvatar = document.querySelector('.profile__avatar');
 
-export const saveBtnText = { initial: 'Сохранить', pending: 'Сохранение...' }
 
 export const userSelectors = {
   profileSelector: '.profile',
